@@ -3,340 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporte de Avances del Hackathon Mobil3</title>
+    <title>Menú Principal de Monad</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="./style/global.css">
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            color: #333;
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #2c3e50;
+        /* Estilos específicos para el encabezado (logo) */
+        .header {
             text-align: center;
+            padding-top: 20px;
         }
-        h2 {
-            color: #34495e;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
-            margin-top: 30px;
-        }
-        h3 {
-            color: #2980b9;
-        }
-        strong {
-            color: #d35400;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            background: #ecf0f1;
-            margin-bottom: 8px;
-            padding: 10px;
-            border-left: 4px solid #3498db;
-            border-radius: 4px;
-        }
-        .date-location {
-            text-align: center;
-            font-style: italic;
-            margin-bottom: 20px;
-            color: #7f8c8d;
-        }
-        .finalists {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .finalist-item {
-            background: #e74c3c;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9em;
-        }
-        .section-separator {
-            border-top: 2px dashed #bdc3c7;
-            margin: 40px 0;
-        }
-        .tech-section {
-            margin-top: 30px;
-            text-align: center;
-        }
-        .tech-list {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 0;
-        }
-        .tech-button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-        .tech-button:hover {
-            background-color: #2980b9;
-        }
-        .chart-wrapper {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .chart-wrapper h3 {
-            margin-top: 0;
-        }
-        .chart-container {
-            display: none;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .chart-container h3 {
-            color: #34495e;
-        }
-        canvas {
-            max-width: 300px;
+        .header img {
+            max-width: 150px;
             height: auto;
         }
-        @media (min-width: 768px) {
-            .tech-list {
-                max-width: 500px;
-                margin-left: auto;
-                margin-right: auto;
-                gap: 10px;
+
+        /* Estilos del menú principal (los botones siempre se muestran en columna) */
+        .main-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 25px; /* Aumenta la separación entre los botones */
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .menu-button {
+            display: block;
+            width: 100%;
+            padding: 15px 10px 10px 10px;
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .menu-button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* Estilos del pie de página */
+        .footer {
+            margin-top: 60px;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 15px;
+        }
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-content img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 5px;
+        }
+        .social-icons a {
+            color: #555;
+            margin: 0 8px;
+            font-size: 1.5em;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: #3498db;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+            color: #777;
+        }
+
+        /* Se elimina la media query para el menú para que siempre sea en columna */
+        @media (min-width: 600px) {
+            .footer {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .footer-content {
+                flex-direction: row;
+                gap: 20px;
             }
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 <body>
 
-<div class="container">
-    <h1>Reporte de Avances del Hackathon Mobil3</h1>
-    <p class="date-location"><strong>Fecha y Lugar:</strong> Ciudad de México, 20 - 24 de agosto de 2025</p>
-
-    <h2>Resumen General del Evento</h2>
-    <p>El Hackathon Mobil3, enfocado en el desarrollo de soluciones innovadoras en fintech y pagos sobre la blockchain de Monad, ha concluido exitosamente. Los equipos trabajaron intensamente en sus proyectos, abordando desafíos técnicos y de negocio con el apoyo de mentores. Este reporte presenta un análisis de las tendencias, logros y obstáculos observados en los tracks principales, así como los proyectos finalistas que surgieron del evento.</p>
-
-    <hr class="section-separator">
-
-    <h2>Track: Pagos</h2>
-    <h3>Perspectiva y Enfoque Estratégico</h3>
-    <p>Los equipos involucrados en el track de Pagos adoptaron un enfoque pragmático y centrado en el usuario. Su estrategia principal fue construir soluciones aprovechando tecnologías de fácil integración y alta componibilidad, como reown, 0x y Para. El objetivo común fue claro: diseñar experiencias que simplificaran el primer contacto del usuario con la red de Monad y, por extensión, con el ecosistema Web3, eliminando fricciones en el proceso de onboarding.</p>
-
-    <h3>Fortalezas y Logros Clave</h3>
-    <ul>
-        <li><strong>Implementación Ágil de Contratos Inteligentes:</strong> Mostraron gran facilidad para integrar la lógica de los smart contracts directamente en sus aplicaciones, validando sus ideas de negocio de manera rápida.</li>
-        <li><strong>Aprovechamiento del Ecosistema:</strong> Supieron capitalizar los servicios ofrecidos por los patrocinadores, utilizando herramientas que eran sencillas de comprender e implementar, lo que aceleró su ciclo de desarrollo.</li>
-        <li><strong>Prototipado Rápido y Validación Local:</strong> Lograron un funcionamiento eficiente en entornos de desarrollo locales, lo que les permitió iterar y probar funcionalidades de forma ágil antes de enfrentar entornos de prueba.</li>
-    </ul>
-
-    <h3>Desafíos y Áreas de Oportunidad</h3>
-    <ul>
-        <li><strong>Complejidad en la Integración de Servicios:</strong> La falta de experiencia se hizo evidente al intentar conectar más de dos servicios de terceros simultáneamente, así como al pasar de un entorno local a la interacción con una red de prueba compartida.</li>
-        <li><strong>Obstáculos en el Flujo de Despliegue:</strong> Surgieron dificultades al configurar los procesos de despliegue continuo con herramientas como GitHub y Vercel, pasos cruciales para verificar el funcionamiento correcto de las aplicaciones en un entorno live.</li>
-        <li><strong>Integración con la Testnet de Monad:</strong> La conexión y migración de la lógica de negocio a la red de prueba específica de Monad representó un obstáculo técnico significativo para varios equipos.</li>
-        <li><strong>Brecha hacia la Portabilidad Móvil:</strong> Se observó una dificultad generalizada para migrar los prototipos, inicialmente concebidos como aplicaciones web, a una versión móvil funcional.</li>
-    </ul>
-
-    <h3>Proyectos Finalistas Destacados ➡️</h3>
-    <div class="finalists">
-        <span class="finalist-item">ACAL-Pagos Oxxo</span>
-        <span class="finalist-item">Loanad</span>
-        <span class="finalist-item">PasaCoin</span>
-        <span class="finalist-item">Te prestamos</span>
+    <div class="container header">
+        <img src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiejgeokgt62gygh3e3frfm5e6xjmjyallf4ixpvv3nchh2uu4my7u"    alt="Logo de la empresa">
     </div>
 
-    <hr class="section-separator">
-
-    <h2>Track de Fintech del Consumidor</h2>
-    <h3>Perspectiva y Enfoque Estratégico</h3>
-    <p>Los equipos de este track se concentraron en resolver problemas financieros persistentes en México y Latinoamérica. Su enfoque estratégico fue utilizar herramientas Web3 para crear soluciones intuitivas, dirigidas a nichos de población con bajo conocimiento tecnológico. El objetivo principal fue abstraer la complejidad de la blockchain para ofrecer productos que fueran fácilmente reconocibles y adoptables, promoviendo así un uso práctico de la tecnología en la región.</p>
-
-    <h3>Fortalezas y Logros Clave</h3>
-    <ul>
-        <li><strong>Integración Avanzada de Ecosistema:</strong> Los equipos integraron de manera efectiva un conjunto diverso de herramientas como reown, 0x, Para, Envio y la red de Monad, demostrando una gran capacidad para construir sobre la infraestructura Web3 existente.</li>
-        <li><strong>Innovación en Pruebas y SocialFi:</strong> El uso de Farcaster para realizar pruebas locales y explorar la interacción social dentro de sus aplicaciones representó un enfoque innovador y diferenciador.</li>
-        <li><strong>Aplicación de Inteligencia Artificial:</strong> Se destacó el manejo de IA para analizar y predecir los flujos de usuario, optimizando la experiencia y la lógica de negocio de las aplicaciones desde una fase temprana.</li>
-    </ul>
-
-    <h3>Desafíos y Áreas de Oportunidad</h3>
-    <ul>
-        <li><strong>Brecha en la Experiencia de Usuario (UX):</strong> El desafío más crítico fue diseñar interfaces que permitieran al consumidor final comprender y utilizar la aplicación sin necesidad de conocimientos previos en tecnología Web3.</li>
-        <li><strong>Despliegue a Producción y Entorno Móvil:</strong> Los equipos enfrentaron dificultades para migrar sus proyectos a una aplicación móvil funcional y desplegarla en un entorno de producción accesible para pruebas de usuario reales.</li>
-        <li><strong>Integración de Contratos Inteligentes:</strong> La implementación y conexión de los smart contracts para gestionar los servicios principales de cada proyecto resultó ser un obstáculo técnico complejo.</li>
-        <li><strong>Madurez en Flujos de Despliegue (CI/CD):</strong> Se repitió la falta de experiencia en el uso de plataformas como GitHub y Vercel para automatizar el despliegue y las pruebas de sus aplicaciones.</li>
-    </ul>
-
-    <h3>Proyectos Finalistas Destacados ➡️</h3>
-    <p>Por su enfoque innovador y el potencial de su solución, los siguientes proyectos han sido seleccionados como finalistas de este track:</p>
-    <div class="finalists">
-        <span class="finalist-item">Outlay</span>
-        <span class="finalist-item">Monadero</span>
-        <span class="finalist-item">GAMpayMX</span>
-        <span class="finalist-item">Senu</span>
+    <div class="container main-menu">
+        <a href="actividades.html" class="menu-button">Actividades / Frutero</a>
+        <a href="analisis.html" class="menu-button">Análisis del Evento</a>
+        <a href="#" class="menu-button">Investigacion Cualitativa</a>
     </div>
 
-    <hr class="section-separator">
-
-    <div class="tech-section">
-        <h2>Tecnologías Destacadas</h2>
-        <p>A continuación, se presentan las principales tecnologías utilizadas por los equipos del Hackathon. Haz clic en cada una para ver un gráfico de su uso.</p>
-        <div class="tech-list">
-            <button class="tech-button" onclick="showChart('0x')">0x</button>
-            <button class="tech-button" onclick="showChart('reown')">reown</button>
-            <button class="tech-button" onclick="showChart('envio')">Envio</button>
-            <button class="tech-button" onclick="showChart('para')">Para</button>
+    <div class="container footer">
+        <div class="footer-content">
+            <img src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiejgeokgt62gygh3e3frfm5e6xjmjyallf4ixpvv3nchh2uu4my7u" alt="Logo de la empresa">
+            <p>&copy; 2025</p>
         </div>
-        
-        <div class="chart-wrapper">
-            <div id="0x-chart" class="chart-container">
-                <h3>Uso de 0x</h3>
-                <canvas id="0xPieChart"></canvas>
-            </div>
-            
-            <div id="reown-chart" class="chart-container">
-                <h3>Uso de reown</h3>
-                <canvas id="reownPieChart"></canvas>
-            </div>
-            
-            <div id="envio-chart" class="chart-container">
-                <h3>Uso de Envio</h3>
-                <canvas id="envioPieChart"></canvas>
-            </div>
-
-            <div id="para-chart" class="chart-container">
-                <h3>Uso de Para</h3>
-                <canvas id="paraPieChart"></canvas>
-            </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-twitter fa-fw"></i></a>
+            <a href="#"><i class="fab fa-github fa-fw"></i></a>
+            <a href="#"><i class="fas fa-paper-plane fa-fw"></i></a>
         </div>
     </div>
-    <hr class="section-separator">
-
-    <h2>Resumen de todos los equipos</h2>
-    <p>Se muestra un resumen de los equipos y el enfoque que se tuvieron a lo largo del hackathon así mismo el trank elegido durante el mismo.</p>
-    <h3>Bitácora equipos</h3>
-    <p>Mobile3</p>
-
-    <hr class="section-separator">
-
-    <h2>Conclusión General y Próximos Pasos</h2>
-    <p>Ambos tracks demostraron una gran capacidad para el prototipado rápido y un claro enfoque en la experiencia del usuario final. La tendencia principal fue el uso de un ecosistema de herramientas modulares para acelerar el desarrollo.</p>
-    <p>Los desafíos comunes en torno al despliegue (CI/CD) y la transición a entornos móviles sugieren una oportunidad clave para el futuro. Se recomienda ofrecer talleres post-hackathon enfocados en estas áreas para ayudar a los equipos a llevar sus prototipos al siguiente nivel y prepararlos para una posible incubación o lanzamiento al mercado. El Hackathon Mobil3 ha sido un éxito, validando el talento local y el potencial de la red de Monad para resolver problemas reales en Latinoamérica.</p>
-
-</div>
-
-<script>
-    Chart.register(ChartDataLabels);
-
-    const charts = {};
-    
-    // Función para crear el gráfico
-    function createChart(id, label, data, backgroundColor) {
-        const ctx = document.getElementById(id).getContext('2d');
-        if (charts[id]) {
-            charts[id].destroy();
-        }
-        charts[id] = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['Proyectos que lo usaron', 'Proyectos que no lo usaron'],
-                datasets: [{
-                    label: `Uso de ${label}`,
-                    data: data,
-                    backgroundColor: backgroundColor,
-                    borderColor: '#f4f4f4',
-                    borderWidth: 2,
-                    hoverOffset: 10,
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false,
-                    },
-                    datalabels: {
-                        color: '#fff',
-                        font: {
-                            weight: 'bold'
-                        },
-                        formatter: (value, context) => {
-                            let total = 0;
-                            context.dataset.data.forEach(data => {
-                                total += data;
-                            });
-                            const percentage = (value / total * 100).toFixed(0);
-                            return `${percentage}%`;
-                        }
-                    },
-                    tooltip: {
-                      callbacks: {
-                        label: function(tooltipItem) {
-                          const value = tooltipItem.raw;
-                          return `${tooltipItem.label}: ${value}%`;
-                        }
-                      }
-                    }
-                }
-            }
-        });
-    }
-
-    // Datos estáticos
-    const staticData = {
-        '0x': {
-            data: [15, 85],
-            colors: ['#3498db', '#bdc3c7']
-        },
-        'reown': {
-            data: [25, 75],
-            colors: ['#e67e22', '#bdc3c7']
-        },
-        'envio': {
-            data: [10, 90],
-            colors: ['#2ecc71', '#bdc3c7']
-        },
-        'para': {
-            data: [30, 70],
-            colors: ['#9b59b6', '#bdc3c7']
-        }
-    };
-
-    // Función principal para mostrar el gráfico
-    function showChart(tech) {
-        const chartContainers = document.querySelectorAll('.chart-container');
-        chartContainers.forEach(container => {
-            container.style.display = 'none';
-        });
-
-        const selectedChartContainer = document.getElementById(`${tech}-chart`);
-        selectedChartContainer.style.display = 'block';
-
-        const techData = staticData[tech];
-        createChart(`${tech}PieChart`, tech.charAt(0).toUpperCase() + tech.slice(1), techData.data, techData.colors);
-    }
-</script>
 
 </body>
 </html>

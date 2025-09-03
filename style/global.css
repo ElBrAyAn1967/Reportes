@@ -1,0 +1,139 @@
+
+/*
+ * Archivo de estilos global para el Reporte del Hackathon Mobil3
+ * Archivo: global.css
+ */
+
+/* Estilos generales del cuerpo y el contenedor principal */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.8; /* Aumenta el interlineado para mejor legibilidad */
+    margin: 40px; /* Aumenta el margen del cuerpo */
+    color: #333;
+}
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: #fff;
+    padding: 40px; /* Aumenta el padding interno */
+    border-radius: 12px; /* Ligeramente más curvo para un look suave */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Sombra más pronunciada */
+}
+
+/* Estilos para títulos y separadores */
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px; /* Más espacio debajo del título principal */
+}
+h2 {
+    color: #34495e;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px; /* Aumenta el espacio debajo del borde */
+    margin-top: 50px; /* Más espacio superior para separar secciones */
+}
+h3 {
+    color: #2980b9;
+    margin-top: 20px; /* Espacio para subtítulos */
+}
+.section-separator {
+    border-top: 2px dashed #bdc3c7;
+    margin: 60px 0; /* Aumenta el margen del separador */
+}
+
+/* Estilos para texto y listas */
+strong {
+    color: #d35400;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+li {
+    background: #ecf0f1;
+    margin-bottom: 12px; /* Más espacio entre elementos de lista */
+    padding: 15px;
+    border-left: 5px solid #3498db; /* Borde un poco más ancho */
+    border-radius: 8px; /* Borde más curvo */
+}
+.date-location {
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 40px; /* Más espacio debajo de la fecha */
+    color: #7f8c8d;
+}
+
+/* Estilos para la sección de finalistas */
+.finalists {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Más espacio entre los finalistas */
+    justify-content: center;
+    margin-top: 30px;
+}
+.finalist-item {
+    background: #e74c3c;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px; /* Borde más curvo */
+    font-weight: bold;
+    font-size: 1em;
+}
+
+/* Estilos para la sección de tecnologías */
+.tech-section {
+    margin-top: 50px; /* Más espacio para esta sección */
+    text-align: center;
+}
+.tech-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Más espacio entre los botones */
+    margin-bottom: 30px;
+}
+.tech-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+.tech-button:hover {
+    background-color: #2980b9;
+}
+.chart-wrapper {
+    margin-top: 30px; /* Más espacio entre botones y gráfico */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.chart-wrapper h3 {
+    margin-top: 0;
+}
+.chart-container {
+    display: none;
+    text-align: center;
+    margin-top: 30px;
+}
+.chart-container h3 {
+    color: #34495e;
+}
+canvas {
+    max-width: 300px;
+    height: auto;
+}
+
+/* Media query para la vista de escritorio */
+@media (min-width: 768px) {
+    .tech-list {
+        max-width: 600px; /* Aumenta el ancho máximo */
+        margin-left: auto;
+        margin-right: auto;
+        gap: 20px; /* Reduce el espacio para que no se vea tan separado */
+    }
+}

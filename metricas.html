@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monad - Equipos</title>
+    <link rel="stylesheet" href="./style/global.css">
+    <style>
+        /* Estilos generales del contenedor y la tabla */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .table-header h2 {
+            border-bottom: none;
+            margin-top: 0;
+            padding-bottom: 0;
+            color: #34495e;
+        }
+
+        .controls button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .controls button:hover {
+            background-color: #2980b9;
+        }
+
+        .controls .new-button {
+            background-color: #27ae60;
+        }
+
+        .controls .new-button:hover {
+            background-color: #229954;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            white-space: nowrap;
+        }
+
+        thead {
+            background-color: #ecf0f1;
+            color: #34495e;
+        }
+
+        tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .status-no-urgente {
+            background-color: #27ae60;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 25px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .status-intermedio {
+            background-color: #f39c12;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 25px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        /* Estilos para el efecto de mostrar/ocultar con CSS */
+        .show-more-checkbox {
+            display: none; /* Oculta el checkbox */
+        }
+        
+        .hidden-row {
+            display: none; /* Oculta las filas por defecto */
+        }
+
+        .show-more-checkbox:checked ~ .table-container .hidden-row {
+            display: table-row; /* Muestra las filas cuando el checkbox está marcado */
+        }
+
+        .show-more-label {
+            display: block;
+            width: fit-content;
+            margin: 20px auto 0;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .show-more-label:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Cambia el texto del botón cuando se muestra la tabla */
+        .show-more-checkbox:checked ~ .show-more-label:before {
+            content: 'Ver menos equipos';
+        }
+        
+        .show-more-label:before {
+            content: 'Ver más equipos';
+        }
+
+        /* Estilos para la vista móvil */
+        @media (max-width: 768px) {
+            .table-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .controls {
+                margin-top: 10px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .controls button {
+                margin: 0;
+            }
+            
+            table {
+                border: 0;
+            }
+
+            thead {
+                display: none;
+            }
+
+            td {
+                display: block;
+                border: none;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+
+            td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+                color: #555;
+            }
+            .show-more-label {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="table-header">
+            <h2>Bitácora de Equipos</h2>
+        </div>
+        
+        <input type="checkbox" id="show-more" class="show-more-checkbox">
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Equipo</th>
+                        <th>Fecha de Registro</th>
+                        <th>Prioridad</th>
+                        <th>Estado</th>
+                        <th>Teléfono</th>
+                        <th>Archivos</th>
+                        <th>Notas</th>
+                        <th>Integrantes</th>
+                        <th>Pendientes</th>
+                    </tr>
+                </thead>
+                <tbody id="teams-table-body">
+                    <tr>
+                        <td data-label="Equipo"><strong>Poacoin</strong></td>
+                        <td data-label="Fecha de Registro">22 de agosto de 2025</td>
+                        <td data-label="Prioridad"><span class="status-no-urgente">No Urgente</span></td>
+                        <td data-label="Estado">Listo</td>
+                        <td data-label="Teléfono">te.me/@lucarnay</td>
+                        <td data-label="Archivos">Fintech</td>
+                        <td data-label="Notas">Pagos, Zero-dev, nest.js, Web View</td>
+                        <td data-label="Integrantes">Lupe, Daniel, Jean Paul, Javier</td>
+                        <td data-label="Pendientes">Pasar el sistema a app y base de datos</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Equipo"><strong>Codex App</strong></td>
+                        <td data-label="Fecha de Registro">22 de agosto de 2025</td>
+                        <td data-label="Prioridad"><span class="status-intermedio">Intermedio</span></td>
+                        <td data-label="Estado">Espera</td>
+                        <td data-label="Teléfono">5512391607</td>
+                        <td data-label="Archivos"></td>
+                        <td data-label="Notas"></td>
+                        <td data-label="Integrantes">Guillermo Alan Martinez Trejo, Donovan Mario Enriquez</td>
+                        <td data-label="Pendientes">Mini app Farcaster</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Equipo"><strong>Cryptalia</strong></td>
+                        <td data-label="Fecha de Registro">22 de agosto de 2025</td>
+                        <td data-label="Prioridad"><span class="status-intermedio">Intermedio</span></td>
+                        <td data-label="Estado">Espera</td>
+                        <td data-label="Teléfono">5521998474</td>
+                        <td data-label="Archivos"></td>
+                        <td data-label="Notas"></td>
+                        <td data-label="Integrantes">Mar, Elba, Fer, Sarvin</td>
+                        <td data-label="Pendientes">Farcaster</td>
+                    </tr>
+                    <tr class="hidden-row">
+                        <td data-label="Equipo"><strong>VibrantOm</strong></td>
+                        <td data-label="Fecha de Registro">22 de agosto de 2025</td>
+                        <td data-label="Prioridad"><span class="status-no-urgente">No Urgente</span></td>
+                        <td data-label="Estado">Listo</td>
+                        <td data-label="Teléfono">5587022815</td>
+                        <td data-label="Archivos">pagos zero dev farcaster basefy y monad</td>
+                        <td data-label="Notas"></td>
+                        <td data-label="Integrantes">Richi</td>
+                        <td data-label="Pendientes">App movil (no farcaster)</td>
+                    </tr>
+                    <tr class="hidden-row">
+                        <td data-label="Equipo"><strong>di4parment</strong></td>
+                        <td data-label="Fecha de Registro">22 de agosto de 2025</td>
+                        <td data-label="Prioridad"><span class="status-no-urgente">No Urgente</span></td>
+                        <td data-label="Estado">Listo</td>
+                        <td data-label="Teléfono">5615148603</td>
+                        <td data-label="Archivos">Airbnb para eventos web3</td>
+                        <td data-label="Notas"></td>
+                        <td data-label="Integrantes">Alyn gomez, Claudia morales, Nallely lopez</td>
+                        <td data-label="Pendientes">aun no programan</td>
+                    </tr>
+                    <tr class="hidden-row">
+                        <td data-label="Equipo"><strong>ARTESANIAS OAXACA</strong></td>
+                        <td data-label="Fecha de Registro">22 de agosto de 2025</td>
+                        <td data-label="Prioridad"><span class="status-no-urgente">No Urgente</span></td>
+                        <td data-label="Estado">Listo</td>
+                        <td data-label="Teléfono">4427766487</td>
+                        <td data-label="Archivos">Fintech</td>
+                        <td data-label="Notas"></td>
+                        <td data-label="Integrantes">Daniela Miranda, Christopher Elias</td>
+                        <td data-label="Pendientes">Conexión wallet</td>
+                    </tr>
+                    <tr class="hidden-row">
+                        <td data-label="Equipo"><strong>FoodCD</strong></td>
+                        <td data-label="Fecha de Registro">22 de agosto de 2025</td>
+                        <td data-label="Prioridad"><span class="status-intermedio">Intermedio</span></td>
+                        <td data-label="Estado">Listo</td>
+                        <td data-label="Teléfono">729931616</td>
+                        <td data-label="Archivos">Fintech 0x zuup app</td>
+                        <td data-label="Notas"></td>
+                        <td data-label="Integrantes">GenGonzález Sanchez, Fernanda Martinez Hernandez, Jose Armando Corona Rivas</td>
+                        <td data-label="Pendientes">Programación</td>
+                    </tr>
+                    <tr class="hidden-row">
+                        <td data-label="Equipo"><strong>Ross</strong></td>
+                        <td data-label="Fecha de Registro">22 de agosto de 2025</td>
+                        <td data-label="Prioridad"><span class="status-no-urgente">No Urgente</span></td>
+                        <td data-label="Estado">Listo</td>
+                        <td data-label="Teléfono">5541289672</td>
+                        <td data-label="Archivos">Pagos</td>
+                        <td data-label="Notas"></td>
+                        <td data-label="Integrantes">Francisco Daniel Lopez Huerta, Heber Moises Macias Flores, Abdiel Muñoz Gonzalez</td>
+                        <td data-label="Pendientes">No programacion</td>
+                    </tr>
+                    <tr class="hidden-row">
+                        <td data-label="Equipo"><strong>tichi</strong></td>
+                        <td data-label="Fecha de Registro">22 de agosto de 2025</td>
+                        <td data-label="Prioridad"><span class="status-no-urgente">No Urgente</span></td>
+                        <td data-label="Estado">Listo</td>
+                        <td data-label="Teléfono">+506 72289768</td>
+                        <td data-label="Archivos">Fintech</td>
+                        <td data-label="Notas"></td>
+                        <td data-label="Integrantes">Ricardo Vallejo, Alfredo Ruiz, Cristian Escalante</td>
+                        <td data-label="Pendientes">programacion</td>
+                    </tr>
+                    <tr class="hidden-row">
+                        <td data-label="Equipo"><strong>punibles</strong></td>
+                        <td data-label="Fecha de Registro">22 de agosto de 2025</td>
+                        <td data-label="Prioridad"><span class="status-no-urgente">No Urgente</span></td>
+                        <td data-label="Estado">Listo</td>
+                        <td data-label="Teléfono">5578107972</td>
+                        <td data-label="Archivos">Fintech</td>
+                        <td data-label="Notas"></td>
+                        <td data-label="Integrantes"></td>
+                        <td data-label="Pendientes"></td>
+                    </tr>
+                    <tr class="hidden-row">
+                        <td data-label="Equipo"><strong>GAM</strong></td>
+                        <td data-label="Fecha de Registro">22 de agosto de 2025</td>
+                        <td data-label="Prioridad"><span class="status-no-urgente">No Urgente</span></td>
+                        <td data-label="Estado">Listo</td>
+                        <td data-label="Teléfono">5565578406</td>
+                        <td data-label="Archivos">Pagos -> pendiente</td>
+                        <td data-label="Notas"></td>
+                        <td data-label="Integrantes"></td>
+                        <td data-label="Pendientes"></td>
+                    </tr>
+                    <tr class="hidden-row">
+                        <td data-label="Equipo"><strong>senju</strong></td>
+                        <td data-label="Fecha de Registro">22 de agosto de 2025</td>
+                        <td data-label="Prioridad"><span class="status-intermedio">Intermedio</span></td>
+                        <td data-label="Estado">Listo</td>
+                        <td data-label="Teléfono"></td>
+                        <td data-label="Archivos"></td>
+                        <td data-label="Notas"></td>
+                        <td data-label="Integrantes"></td>
+                        <td data-label="Pendientes"></td>
+                    </tr>
+                    <tr class="hidden-row">
+                        <td data-label="Equipo"><strong>ICANA</strong></td>
+                        <td data-label="Fecha de Registro">22 de agosto de 2025</td>
+                        <td data-label="Prioridad"><span class="status-intermedio">Intermedio</span></td>
+                        <td data-label="Estado">Listo</td>
+                        <td data-label="Teléfono">5565567416</td>
+                        <td data-label="Archivos"></td>
+                        <td data-label="Notas"></td>
+                        <td data-label="Integrantes"></td>
+                        <td data-label="Pendientes"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <label for="show-more" class="show-more-label"></label>
+    </div>
+</body>
+</html>

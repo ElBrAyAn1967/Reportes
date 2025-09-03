@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Avances del Hackathon Mobil3</title>
+    
+    <link rel="stylesheet" href="./style/global.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.9.3/dist/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <button class="download-button" onclick="downloadReport()">Descargar Reporte (PDF)</button>
+    <h1>Reporte de Avances del Hackathon Mobil3</h1>
+    <p class="date-location"><strong>Fecha y Lugar:</strong> Ciudad de México, 20 - 24 de agosto de 2025</p>
+
+    <h2>Resumen General del Evento</h2>
+    <p>El Hackathon Mobil3, enfocado en el desarrollo de soluciones innovadoras en fintech y pagos sobre la blockchain de Monad, ha concluido exitosamente. Los equipos trabajaron intensamente en sus proyectos, abordando desafíos técnicos y de negocio con el apoyo de mentores. Este reporte presenta un análisis de las tendencias, logros y obstáculos observados en los tracks principales, así como los proyectos finalistas que surgieron del evento.</p>
+
+    <hr class="section-separator">
+
+    <h2>Track: Pagos</h2>
+    <h3>Perspectiva y Enfoque Estratégico</h3>
+    <p>Los equipos involucrados en el track de Pagos adoptaron un enfoque pragmático y centrado en el usuario. Su estrategia principal fue construir soluciones aprovechando tecnologías de fácil integración y alta componibilidad, como reown, 0x y Para. El objetivo común fue claro: diseñar experiencias que simplificaran el primer contacto del usuario con la red de Monad y, por extensión, con el ecosistema Web3, eliminando fricciones en el proceso de onboarding.</p>
+
+    <h3>Fortalezas y Logros Clave</h3>
+    <ul>
+        <li><strong>Implementación Ágil de Contratos Inteligentes:</strong> Mostraron gran facilidad para integrar la lógica de los smart contracts directamente en sus aplicaciones, validando sus ideas de negocio de manera rápida.</li>
+        <li><strong>Aprovechamiento del Ecosistema:</strong> Supieron capitalizar los servicios ofrecidos por los patrocinadores, utilizando herramientas que eran sencillas de comprender e implementar, lo que aceleró su ciclo de desarrollo.</li>
+        <li><strong>Prototipado Rápido y Validación Local:</strong> Lograron un funcionamiento eficiente en entornos de desarrollo locales, lo que les permitió iterar y probar funcionalidades de forma ágil antes de enfrentar entornos de prueba.</li>
+    </ul>
+
+    <h3>Desafíos y Áreas de Oportunidad</h3>
+    <ul>
+        <li><strong>Complejidad en la Integración de Servicios:</strong> La falta de experiencia se hizo evidente al intentar conectar más de dos servicios de terceros simultáneamente, así como al pasar de un entorno local a la interacción con una red de prueba compartida.</li>
+        <li><strong>Obstáculos en el Flujo de Despliegue:</strong> Surgieron dificultades al configurar los procesos de despliegue continuo con herramientas como GitHub y Vercel, pasos cruciales para verificar el funcionamiento correcto de las aplicaciones en un entorno live.</li>
+        <li><strong>Integración con la Testnet de Monad:</strong> La conexión y migración de la lógica de negocio a la red de prueba específica de Monad representó un obstáculo técnico significativo para varios equipos.</li>
+        <li><strong>Brecha hacia la Portabilidad Móvil:</strong> Se observó una dificultad generalizada para migrar los prototipos, inicialmente concebidos como aplicaciones web, a una versión móvil funcional.</li>
+    </ul>
+
+    <h3>Proyectos Finalistas Destacados ➡️</h3>
+    <div class="finalists">
+        <span class="finalist-item">ACAL-Pagos Oxxo</span>
+        <span class="finalist-item">Loanad</span>
+        <span class="finalist-item">PasaCoin</span>
+        <span class="finalist-item">Te prestamos</span>
+    </div>
+
+    <hr class="section-separator">
+
+    <div class="tech-section">
+        <h2>Uso de Tecnologias de patrocinadores</h2>
+        <p>A continuación, se presentan las principales tecnologías utilizadas por los equipos del Hackathon. Haz clic en cada una para ver un gráfico de su uso.</p>
+        <div class="tech-list">
+            <button class="tech-button" onclick="showChart('0x')">0x</button>
+            <button class="tech-button" onclick="showChart('reown')">reown</button>
+            <button class="tech-button" onclick="showChart('envio')">Envio</button>
+            <button class="tech-button" onclick="showChart('para')">Para</button>
+        </div>
+        
+        <div class="chart-wrapper">
+            <div id="0x-chart" class="chart-container">
+                <h3>Uso de 0x</h3>
+                <canvas id="0xPieChart"></canvas>
+            </div>
+            
+            <div id="reown-chart" class="chart-container">
+                <h3>Uso de reown</h3>
+                <canvas id="reownPieChart"></canvas>
+            </div>
+            
+            <div id="envio-chart" class="chart-container">
+                <h3>Uso de Envio</h3>
+                <canvas id="envioPieChart"></canvas>
+            </div>
+
+            <div id="para-chart" class="chart-container">
+                <h3>Uso de Para</h3>
+                <canvas id="paraPieChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <hr class="section-separator">
+
+    <h2>Resumen de todos los equipos</h2>
+    <p>Se muestra un resumen de los equipos y el enfoque que se tuvieron a lo largo del hackathon así mismo el trank elegido durante el mismo.</p>
+  
+    <div id="metricas-container"></div>
+    
+    <hr class="section-separator">
+
+    <h2>Conclusión General y Próximos Pasos</h2>
+    <p>Ambos tracks demostraron una gran capacidad para el prototipado rápido y un claro enfoque en la experiencia del usuario final. La tendencia principal fue el uso de un ecosistema de herramientas modulares para acelerar el desarrollo.</p>
+    <p>Los desafíos comunes en torno al despliegue (CI/CD) y la transición a entornos móviles sugieren una oportunidad clave para el futuro. Se recomienda ofrecer talleres post-hackathon enfocados en estas áreas para ayudar a los equipos a llevar sus prototipos al siguiente nivel y prepararlos para una posible incubación o lanzamiento al mercado. El Hackathon Mobil3 ha sido un éxito, validando el talento local y el potencial de la red de Monad para resolver problemas reales en Latinoamérica.</p>
+</div>
+
+<script>
+    Chart.register(ChartDataLabels);
+
+    const charts = {};
+    
+    // Función para crear el gráfico
+    function createChart(id, label, data, backgroundColor) {
+        const ctx = document.getElementById(id).getContext('2d');
+        if (charts[id]) {
+            charts[id].destroy();
+        }
+        charts[id] = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Proyectos que lo usaron', 'Proyectos que no lo usaron'],
+                datasets: [{
+                    label: `Uso de ${label}`,
+                    data: data,
+                    backgroundColor: backgroundColor,
+                    borderColor: '#f4f4f4',
+                    borderWidth: 2,
+                    hoverOffset: 10,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    datalabels: {
+                        color: '#fff',
+                        font: {
+                            weight: 'bold'
+                        },
+                        formatter: (value, context) => {
+                            let total = 0;
+                            context.dataset.data.forEach(data => {
+                                total += data;
+                            });
+                            const percentage = (value / total * 100).toFixed(0);
+                            return `${percentage}%`;
+                        }
+                    },
+                    tooltip: {
+                      callbacks: {
+                        label: function(tooltipItem) {
+                          const value = tooltipItem.raw;
+                          return `${tooltipItem.label}: ${value}%`;
+                        }
+                      }
+                    }
+                }
+            }
+        });
+    }
+
+    // Datos estáticos
+    const staticData = {
+        '0x': {
+            data: [45, 55],
+            colors: ['#3498db', '#bdc3c7']
+        },
+        'reown': {
+            data: [75, 25],
+            colors: ['#e67e22', '#bdc3c7']
+        },
+        'envio': {
+            data: [80, 20],
+            colors: ['#2ecc71', '#bdc3c7']
+        },
+        'para': {
+            data: [30, 70],
+            colors: ['#9b59b6', '#bdc3c7']
+        }
+    };
+
+    // Función principal para mostrar el gráfico
+    function showChart(tech) {
+        const chartContainers = document.querySelectorAll('.chart-container');
+        chartContainers.forEach(container => {
+            container.style.display = 'none';
+        });
+
+        const selectedChartContainer = document.getElementById(`${tech}-chart`);
+        selectedChartContainer.style.display = 'block';
+
+        const techData = staticData[tech];
+        createChart(`${tech}PieChart`, tech.charAt(0).toUpperCase() + tech.slice(1), techData.data, techData.colors);
+    }
+    
+    // Función para descargar el reporte como PDF
+    function downloadReport() {
+        const element = document.getElementById('report-container');
+        html2pdf(element, {
+            margin: 10,
+            filename: 'Reporte_Hackathon_Mobil3.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        });
+    }
+
+    // Script para cargar metricas.html
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('metricas.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('metricas-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error al cargar metricas.html:', error));
+    });
+</script>
+
+</body>
+</html>
