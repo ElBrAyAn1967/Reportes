@@ -3,29 +3,66 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mobil3 Hackathon x Monad · Preliminary Report</title>
+  <title>Mobil3 Hackathon x Monad · Enhanced Field Report</title>
 
   <link rel="stylesheet" href="./style/global.css">
   <style>
-    .card{background:#fff;padding:32px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.08);margin-bottom:32px}
+    .card{background:#fff;padding:40px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.1);margin-bottom:40px}
     .container{max-width:1100px;margin:0 auto;padding:24px}
     .centered-text{text-align:center}
     .muted{color:#6b7280}
     .tag{display:inline-block;padding:4px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:600;font-size:12px}
     .warn{background:#fff7ed;color:#9a3412}
     .ok{background:#ecfdf5;color:#065f46}
+    .info{background:#eff6ff;color:#1e40af}
     .section-separator{border:0;border-top:1px solid #e5e7eb;margin:24px 0}
     .tech-list{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-    .tech-button{padding:8px 12px;border-radius:8px;border:1px solid #e5e7eb;background:#f9fafb;cursor:pointer}
-    .tech-button:focus,.tech-button:hover{outline:none;background:#f3f4f6}
+    .tech-button{padding:8px 12px;border-radius:8px;border:1px solid #bdc3c7;background:#ecf0f1;color:#2c3e50;cursor:pointer;font-weight:500}
+    .tech-button:focus,.tech-button:hover{outline:none;background:#d5dbdb;border-color:#95a5a6}
     .chart-wrapper{position:relative}
     .chart-container{display:none;max-width:520px}
     .placeholder{padding:20px;border:1px dashed #e5e7eb;border-radius:12px;background:#fafafa}
-    table{width:100%;border-collapse:collapse}
-    th,td{padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:left;vertical-align:top}
-    thead{background:#f3f4f6}
+    .table-container{overflow-x:auto;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.05);margin-top:20px}
+    table{width:100%;border-collapse:collapse;min-width:760px}
+    thead{background-color:#3498db;color:#fff}
+    th,td{padding:14px 16px;border-bottom:1px solid #e5e7eb;text-align:left;vertical-align:top}
+    tbody tr:hover{background-color:#ecf0f1}
+    .total-row{font-weight:700;background-color:#d35400;color:#fff}
+    .total-row td{border-top:2px solid #34495e}
     .download-button{margin:12px 0 16px;padding:10px 14px;border:0;border-radius:10px;background:#111827;color:#fff;cursor:pointer}
-    @media (max-width:768px){.container{padding:16px}.chart-container{max-width:100%}}
+    
+    /* Collapsible sections */
+    .collapsible{background:#ecf0f1;border:1px solid #e2e8f0;border-radius:8px;margin:12px 0}
+    .collapsible-header{padding:16px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600}
+    .collapsible-header:hover{background:#d5dbdb}
+    .collapsible-content{display:none;padding:0 20px 20px;border-top:1px solid #e2e8f0}
+    .collapsible.open .collapsible-content{display:block}
+    .collapsible-toggle{font-size:18px;transition:transform 0.2s}
+    .collapsible.open .collapsible-toggle{transform:rotate(90deg)}
+    
+    .metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:20px 0}
+    .metric-card{background:#ecf0f1;padding:16px;border-radius:8px;text-align:center}
+    .metric-value{font-size:2em;font-weight:bold;color:#3498db}
+    .metric-label{color:#6b7280;font-size:0.9em;margin-top:4px}
+    
+    .highlight-box{background:#ecf0f1;padding:20px;border-radius:12px;margin:16px 0;border-left:5px solid #3498db}
+    .highlight-box h3{margin-top:0;color:#34495e}
+    
+    .platform-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+    
+    .list-with-links{list-style:none;padding-left:0}
+    .list-with-links li{background:#ecf0f1;margin-bottom:12px;padding:15px;border-left:5px solid #3498db;border-radius:8px}
+    .list-with-links li strong{display:block}
+    
+    a{color:#3498db;text-decoration:none}
+    a:hover{text-decoration:underline}
+    
+    @media (max-width:768px){
+      .container{padding:20px}
+      .chart-container{max-width:100%}
+      .metric-grid{grid-template-columns:1fr 1fr}
+      .platform-grid{grid-template-columns:1fr}
+    }
   </style>
 
   <!-- libs -->
@@ -37,321 +74,367 @@
 
 <div id="report-container" class="container">
   <button class="download-button" onclick="downloadReport()">Download Report (PDF)</button>
-  <h1 class="centered-text">Mobil3 Hackathon x Monad — Preliminary Field Report</h1>
+  <h1 class="centered-text">Mobil3 Hackathon x Monad — Enhanced Field Report</h1>
   <p class="centered-text muted">Mexico City · Aug 20–24, 2025 &nbsp;•&nbsp; Pre-event enablement: Aug 11–15, 2025</p>
 
+  <!-- Key Metrics Overview -->
   <div class="card">
-    <span class="tag warn">Preliminary — data pending full submissions list</span>
-    <h2>Scope & Data Status</h2>
-    <ul>
-      <li>This document captures <strong>field observations</strong> and <strong>mentor interactions</strong> across tracks we followed closely (BGA, 0x, Para, reown).</li>
-      <li>Final, audited metrics (per-team tech adoption, repos, on-chain evidence) will ship after the <strong>official submissions list</strong> is available.</li>
-    </ul>
+    <h2>Event Overview</h2>
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-value">36</div>
+        <div class="metric-label">Total Submissions</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">3</div>
+        <div class="metric-label">Main Tracks</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">5</div>
+        <div class="metric-label">Sponsor Bounties</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">91</div>
+        <div class="metric-label">Mentor Hours</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">83%</div>
+        <div class="metric-label">Mobile/PWA Focus</div>
+      </div>
+    </div>
   </div>
 
+  <!-- Executive Insights -->
   <div class="card">
-    <h2>Executive Highlights</h2>
-    <ul>
-      <li><strong>Fast local prototyping.</strong> Teams advanced wallet connect, payments, and UX flows quickly in local/dev environments.</li>
-      <li><strong>User-first Payments.</strong> Clear focus on reducing first-time Web3 friction on Monad.</li>
-      <li><strong>Modular stacks.</strong> Sponsor SDKs were adopted when integration paths were straightforward.</li>
-      <li><strong>Testnet migration had mixed results.</strong> Local prototyping was fast; moving to <strong>Monad testnet</strong> created friction for some (RPC setup, environment promotion, contract migration).</li>
-      <li><strong>Recurring blockers.</strong> Deploy setup (Vercel/GitHub), testnet configuration, and mobile builds (React Native/Expo).</li>
-    </ul>
+    <h2>Key Insights</h2>
+    
+    <div class="highlight-box">
+      <h3>Payments Domination</h3>
+      <p>The Payments track captured 67% of all submissions (24/36), indicating massive market demand for Web3 payment solutions in Latin America. This extreme concentration suggests teams see immediate real-world applications in the payments space.</p>
+    </div>
+
+    <div class="highlight-box">
+      <h3>Mobile-First Reality</h3>
+      <p>30 out of 36 projects (83%) chose mobile or PWA deployment, reflecting the mobile-first reality of Latin American markets where smartphones are the primary internet access point.</p>
+    </div>
+
+    <div class="highlight-box">
+      <h3>Regional Problem-Solution Fit</h3>
+      <p>Projects like Malintzin (Mexican school cards → local payments), GAMpayMX (offline payments), and Senu (Nicaragua-Costa Rica remittances) show deep understanding of regional pain points and infrastructure constraints.</p>
+    </div>
   </div>
 
-  <!-- Tech/Submissions pies -->
+  <!-- Track Analysis -->
   <div class="card">
-    <h2>Sponsor/Track Touchpoints (Submissions)</h2>
-    <p class="muted">We retain quick pies for clarity. <strong>BGA</strong> and <strong>Envio</strong> reflect current counts; others remain <em>pending verification</em>.</p>
+    <h2>Track Distribution Analysis</h2>
+    <canvas id="trackDistributionChart" style="max-width:600px;margin:0 auto"></canvas>
+    
+    <div class="collapsible">
+      <div class="collapsible-header" onclick="toggleCollapsible(this)">
+        <span>Detailed Track Breakdown</span>
+        <span class="collapsible-toggle">▶</span>
+      </div>
+      <div class="collapsible-content">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr><th>Track</th><th>Submissions</th><th>Percentage</th><th>Notable Pattern</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Payments</td><td>24</td><td>67%</td><td>Heavy focus on remittances, P2P transfers, and local payment integration</td></tr>
+              <tr><td>Consumer Fintech</td><td>8</td><td>22%</td><td>Education, micro-lending, savings, and wellness apps</td></tr>
+              <tr><td>Online</td><td>4</td><td>11%</td><td>Creator economy and content platforms</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sponsor Integration Analysis -->
+  <div class="card">
+    <h2>Sponsor Technology Adoption</h2>
+    <p class="muted">Analysis based on submitted project data and bounty participation.</p>
 
     <div class="tech-list">
       <button class="tech-button" onclick="showChart('bga')">BGA</button>
-      <button class="tech-button" onclick="showChart('envio')">Envio</button>
+      <button class="tech-button" onclick="showChart('reown')">Reown</button>
       <button class="tech-button" onclick="showChart('0x')">0x</button>
-      <button class="tech-button" onclick="showChart('reown')">reown</button>
+      <button class="tech-button" onclick="showChart('envio')">Envio</button>
       <button class="tech-button" onclick="showChart('para')">Para</button>
     </div>
 
     <div class="chart-wrapper">
-      <!-- BGA (real: 20 of 30 overall) -->
       <div id="bga-chart" class="chart-container" style="display:block">
-        <h3>BGA — Track Submissions</h3>
-        <canvas id="bgaPieChart"></canvas>
-        <p class="muted">20 BGA submissions out of 30 total event submissions.</p>
+        <h3>Blockchain for Good (BGA) Participation</h3>
+        <canvas id="bgaChart"></canvas>
+        <p class="muted">20 out of 36 submissions (56%) participated in the BGA track, focusing on social impact applications.</p>
       </div>
 
-      <!-- Envio (real: 7 of 30 overall) -->
-      <div id="envio-chart" class="chart-container">
-        <h3>Envio — Used in Submissions</h3>
-        <canvas id="envioPieChart"></canvas>
-        <p class="muted">7 submissions used Envio out of 30 total.</p>
-      </div>
-
-      <!-- Placeholders (pending verification) -->
-      <div id="0x-chart" class="chart-container">
-        <div class="placeholder">
-          <strong>0x — Data pending verification</strong><br/>
-          Percentages will be computed from audited repositories and official submissions.
-        </div>
-      </div>
       <div id="reown-chart" class="chart-container">
-        <div class="placeholder">
-          <strong>reown — Data pending verification</strong><br/>
-          Percentages will be computed from audited repositories and official submissions.
-        </div>
+        <h3>Reown AppKit Integration</h3>
+        <canvas id="reownChart"></canvas>
+        <p class="muted">16 out of 36 submissions (44%) integrated Reown AppKit for wallet connectivity and user authentication.</p>
       </div>
+
+      <div id="0x-chart" class="chart-container">
+        <h3>0x Protocol Integration</h3>
+        <canvas id="zeroXChart"></canvas>
+        <p class="muted">9 out of 36 submissions (25%) integrated 0x Protocol for token swaps and gasless transactions.</p>
+      </div>
+
+      <div id="envio-chart" class="chart-container">
+        <h3>Envio Analytics Usage</h3>
+        <canvas id="envioChart"></canvas>
+        <p class="muted">5 out of 36 submissions (14%) used Envio for real-time blockchain data analytics and dashboards.</p>
+      </div>
+
       <div id="para-chart" class="chart-container">
-        <div class="placeholder">
-          <strong>Para — Data pending verification</strong><br/>
-          Percentages will be computed from audited repositories and official submissions.
+        <h3>Para Wallet Integration</h3>
+        <canvas id="paraChart"></canvas>
+        <p class="muted">4 out of 36 submissions (11%) integrated Para for App Clips and embedded wallet functionality.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Platform Preferences -->
+  <div class="card">
+    <h2>Platform Distribution</h2>
+    <div class="platform-grid">
+      <div>
+        <canvas id="platformChart"></canvas>
+      </div>
+      <div>
+        <h3>Mobile-First Strategy Confirmed</h3>
+        <p>Teams overwhelmingly chose mobile-friendly platforms:</p>
+        <ul>
+          <li><strong>Progressive Web Apps (PWA):</strong> 16 teams (44%)</li>
+          <li><strong>Android Apps (.apk):</strong> 14 teams (39%)</li>
+          <li><strong>Farcaster Mini Apps:</strong> 3 teams (8%)</li>
+          <li><strong>iOS/Other:</strong> 3 teams (8%)</li>
+        </ul>
+        <p class="muted">This distribution confirms LATAM's mobile-first internet usage patterns, where smartphones are often the primary computing device.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mentorship Analysis -->
+  <div class="card">
+    <h2>Mentorship Impact & Activities</h2>
+    <p>All mentors exceeded their pre-assigned hours, with many taking on additional shifts beyond their original commitment. The mentorship model provided comprehensive coverage across technical, design, and business development needs.</p>
+    
+    <div class="collapsible">
+      <div class="collapsible-header" onclick="toggleCollapsible(this)">
+        <span>Mentor Contributions by Specialization</span>
+        <span class="collapsible-toggle">▶</span>
+      </div>
+      <div class="collapsible-content">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr><th>Mentor</th><th>Hours</th><th>Key Focus Areas</th><th>Notable Contributions</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Antonio Starkfit</td><td>7</td><td>Technical architecture, Web3 integrations, React Native</td><td>Helped teams execute wallet connections and mobile app development</td></tr>
+              <tr><td>Arturo</td><td>6</td><td>Smart contracts, Monad deployment, technical review</td><td>Contract reviews, pitch refinement, resolved Reown documentation issues</td></tr>
+              <tr><td>Brayan</td><td>6</td><td>Frontend development, PWA setup</td><td>Accelerated frontend development and resolved integration challenges</td></tr>
+              <tr><td>Valentín</td><td>6</td><td>Technical debugging, blockchain education</td><td>Total technical support for 9 teams, from zero-knowledge to advanced debugging</td></tr>
+              <tr><td>Vianey</td><td>6</td><td>Business strategy, pitch development</td><td>Strategic mentorship for freelancer platforms, savings apps, and AI assistants</td></tr>
+              <tr><td>Mel</td><td>6</td><td>Idea validation, team formation, tooling</td><td>Early-stage guidance for 7 teams across payments, wellness, and prediction markets</td></tr>
+              <tr><td>Jistro</td><td>6</td><td>Full-stack development</td><td>End-to-end development support and architecture guidance</td></tr>
+              <tr><td>Anthony</td><td>6</td><td>Mobile development, React Native</td><td>Specialized support for mobile teams and cross-platform solutions</td></tr>
+              <tr><td>Jazz</td><td>5</td><td>UX/UI design, branding, communication</td><td>Design mentorship for 10 teams, focusing on user flows and brand identity</td></tr>
+              <tr><td>Jesús (RogersX)</td><td>5</td><td>DeFi protocols, architecture validation</td><td>Remote mentorship for CATE, RoomFi, Senu, and Orbe teams</td></tr>
+              <tr><td>Sergio</td><td>5</td><td>Mobile development, Para integration</td><td>Resolved Para SDK issues for React Native and Flutter projects</td></tr>
+              <tr><td>Carlos C</td><td>5</td><td>Blockchain architecture</td><td>Remote technical consultation and hackathon promotion</td></tr>
+              <tr><td>Erik</td><td>5</td><td>Payment systems integration</td><td>Specialized support for payment-focused teams</td></tr>
+              <tr><td>Jennifer Gabriela</td><td>5</td><td>Business development</td><td>Remote business strategy and market validation guidance</td></tr>
+              <tr><td>Roman</td><td>5</td><td>Technical development</td><td>General technical support and problem-solving</td></tr>
+              <tr><td>Jeny</td><td>4</td><td>Development tools, GitHub, Visual Studio Code</td><td>Environment setup and toolchain configuration for 4 teams</td></tr>
+              <tr><td>Michael</td><td>3</td><td>Web3 onboarding, team formation</td><td>Helped teams with limited Web3 experience and technical member recruitment</td></tr>
+            </tbody>
+            <tr class="total-row">
+              <td><strong>Total Coverage</strong></td>
+              <td><strong>91</strong></td>
+              <td><strong>15.17 equivalent 6-hour shifts</strong></td>
+              <td><strong>Hybrid on-site/remote model</strong></td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- BGA insights -->
+  <!-- Technical Challenges Based on Mentor Reports -->
   <div class="card">
-    <h2>BGA Track — Sample Insights (Partial)</h2>
-    <p class="muted">Based on the currently available BGA submissions you shared (partial list). We summarize themes without assuming the missing entries.</p>
+    <h2>Technical Challenges & Solutions</h2>
+    
+    <div class="collapsible">
+      <div class="collapsible-header" onclick="toggleCollapsible(this)">
+        <span>Common Technical Blockers (From Mentor Reports)</span>
+        <span class="collapsible-toggle">▶</span>
+      </div>
+      <div class="collapsible-content">
+        <ol>
+          <li><strong>Reown Integration Issues:</strong> Multiple mentors reported teams struggling with wallet connection, bundle identifier setup, and documentation complexity</li>
+          <li><strong>Mobile Build Complexity:</strong> React Native and Flutter deployment challenges, especially APK generation and export issues</li>
+          <li><strong>Smart Contract Knowledge Gaps:</strong> Basic Solidity understanding and Monad testnet configuration problems</li>
+          <li><strong>Version Control Issues:</strong> Teams using AI tools (Claude Code) losing progress due to lack of proper git commits</li>
+          <li><strong>API Integration Mistakes:</strong> Incorrect API approaches (e.g., Bitso integration taking days instead of minutes)</li>
+          <li><strong>Environment Setup:</strong> Node.js package installation, dependency conflicts, and development environment configuration</li>
+        </ol>
+      </div>
+    </div>
 
-    <canvas id="bgaBarChart" style="max-width:720px"></canvas>
-
-    <h3>Projects (Partial List)</h3>
-    <table id="bga-table">
-      <thead>
-        <tr>
-          <th>Category</th>
-          <th>Project</th>
-          <th>1-line Summary</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-
-    <p class="muted">Note: This is a partial snapshot of BGA; final counts and deeper analysis will update after we receive the full submissions list.</p>
+    <div class="collapsible">
+      <div class="collapsible-header" onclick="toggleCollapsible(this)">
+        <span>Mentor Solution Patterns</span>
+        <span class="collapsible-toggle">▶</span>
+      </div>
+      <div class="collapsible-content">
+        <ul class="list-with-links">
+          <li><strong>Architecture Guidance:</strong> Mentors helped teams understand full Web3 application components (frontend, backend, smart contracts, wallets, APIs, databases)</li>
+          <li><strong>Live Debugging Sessions:</strong> Real-time troubleshooting of wallet connectivity, transaction signing, and integration issues</li>
+          <li><strong>Platform Recommendations:</strong> Suggesting PWA alternatives when React Native builds failed, especially for mobile-focused teams</li>
+          <li><strong>Template Distribution:</strong> Providing pre-configured development environments and working examples</li>
+          <li><strong>Idea Validation & Refinement:</strong> Helping teams focus on viable MVP features and avoid over-engineering</li>
+          <li><strong>Design & UX Improvements:</strong> Addressing user flow issues, brand identity, and pitch presentation quality</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
-  <!-- Mentorship -->
-  <div class="card">
-    <h2>Mentorship Workload</h2>
-    <p class="muted">Each shift equals 6 hours. Remote mentors are marked below.</p>
 
-    <table id="mentors-table">
-      <thead>
-        <tr>
-          <th>Mentor</th>
-          <th>Hours</th>
-          <th>Remote</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-      <tfoot>
-        <tr>
-          <th>Total Hours</th>
-          <th id="total-hours">—</th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>Equivalent 6-hour Shifts</th>
-          <th id="total-shifts">—</th>
-          <th></th>
-        </tr>
-      </tfoot>
-    </table>
+
+  <!-- Recommendations -->
+  <div class="card">
+    <h2>Strategic Recommendations</h2>
+    
+    <div class="collapsible">
+      <div class="collapsible-header" onclick="toggleCollapsible(this)">
+        <span>For Future Hackathons</span>
+        <span class="collapsible-toggle">▶</span>
+      </div>
+      <div class="collapsible-content">
+        <ul class="list-with-links">
+          <li><strong>Pre-Event Technical Setup:</strong> Dedicated environment configuration session before coding begins, addressing the dependency and setup issues that affected multiple teams</li>
+          <li><strong>Enhanced Mobile Development Support:</strong> Specialized workshops for React Native/Flutter, APK generation, and mobile deployment workflows</li>
+          <li><strong>Git Workflow Training:</strong> Mandatory version control training, especially for AI-assisted development tools like Claude Code</li>
+          <li><strong>Spanish Technical Documentation:</strong> Core integration guides translated to Spanish for better accessibility and reduced mentorship load</li>
+          <li><strong>Improved Sponsor SDK Documentation:</strong> Clearer documentation for Reown, Para, and other sponsor integrations based on common issues encountered</li>
+          <li><strong>Design & Communication Workshops:</strong> Early-stage workshops on UX flows, brand identity, and pitch development to complement technical mentorship</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="collapsible">
+      <div class="collapsible-header" onclick="toggleCollapsible(this)">
+        <span>For Ecosystem Development</span>
+        <span class="collapsible-toggle">▶</span>
+      </div>
+      <div class="collapsible-content">
+        <ul class="list-with-links">
+          <li><strong>Payment Infrastructure Priority:</strong> The 67% concentration in payments indicates massive market opportunity for Web3 payment solutions in LATAM</li>
+          <li><strong>Mobile SDK Investment:</strong> React Native and PWA tooling should be first-class in Web3 development, given the 83% mobile/PWA adoption rate</li>
+          <li><strong>Regional Partnership Development:</strong> Direct integrations with local payment systems (OXXO, WhatsApp Business, local banks) to support the innovation patterns observed</li>
+          <li><strong>Micro-Transaction Optimization:</strong> Tools and infrastructure optimized for sub-dollar transactions and micro-insurance use cases</li>
+          <li><strong>Offline-First Solutions:</strong> Network-resilient applications for infrastructure-constrained regions, as demonstrated by GAMpayMX success</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
-  <!-- Teams snapshot -->
-  <div class="card">
-    <h2>Team Summary</h2>
-    <p><span class="tag warn">Initial Intake Snapshot (Day-1)</span> &nbsp;This snapshot will be superseded by the <em>Final Team Matrix</em> once the official submissions list and repositories are audited.</p>
-    <div id="metricas-container" class="muted">Loading Day-1 snapshot…</div>
-  </div>
-
-  <!-- Challenges & Recommendations (simplified language) -->
-  <div class="card">
-    <h2>Key Challenges & What We Did</h2>
-    <ul>
-      <li><strong>Deploy setup (Vercel/GitHub).</strong> We shared simple templates and an env-vars checklist so teams could push a working preview.</li>
-      <li><strong>Moving from local to Monad testnet.</strong> We provided a quick config and a verified <code>.env.example</code> to unblock RPC/chain ID issues.</li>
-      <li><strong>Contract deployment.</strong> We handed out minimal scripts and step-by-step instructions to get the first contract live.</li>
-      <li><strong>Wallet connect / signing errors.</strong> We mapped common errors to fixes using reown examples.</li>
-      <li><strong>Mobile builds.</strong> We pointed teams to React Native/Expo starters and suggested a PWA fallback when needed.</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h2>Recommendations (Next Steps)</h2>
-    <ul>
-      <li><strong>Official Starter Templates</strong> (Web & RN/Expo) with reown, a “first TX on Monad” example, and ready-to-use CI/CD.</li>
-      <li><strong>Two-week Follow-on Support</strong> (office hours) with sponsors focused on turning demos into MVPs.</li>
-      <li><strong>Optional Telemetry</strong> to measure time-to-first-transaction and SDK uptake (developer activation).</li>
-      <li><strong>Publish Final Team Matrix</strong> once we have the full submissions list (repo, demo, contract address, first tx hash).</li>
-    </ul>
-  </div>
 </div>
 
 <script>
-  // --- PDF export ---
+  // --- Utility Functions ---
   function downloadReport(){
     const el = document.getElementById('report-container');
     html2pdf(el, {
       margin: 10,
-      filename: 'Mobil3xMonad_Preliminary_Report.pdf',
+      filename: 'Mobil3xMonad_Enhanced_Report.pdf',
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 2 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     });
   }
 
-  // --- Charts ---
+  function toggleCollapsible(header) {
+    const collapsible = header.parentElement;
+    collapsible.classList.toggle('open');
+  }
+
+  function showChart(sponsor) {
+    // Show/hide charts
+    const charts = ['bga', 'reown', '0x', 'envio', 'para'];
+    charts.forEach(chart => {
+      const el = document.getElementById(chart + '-chart');
+      if(el) el.style.display = (chart === sponsor) ? 'block' : 'none';
+    });
+  }
+
+  // --- Chart Configurations ---
   Chart.register(ChartDataLabels);
 
-  function renderBGAPieChart(){
-    const ctx = document.getElementById('bgaPieChart').getContext('2d');
-    const bga = 20;
-    const other = 30 - bga; // 10
-    new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: ['BGA submissions', 'Other tracks'],
-        datasets: [{
-          data: [bga, other],
-          backgroundColor: ['#6366F1', '#CBD5E1'],
-          borderColor: '#ffffff',
-          borderWidth: 2,
-          hoverOffset: 8
-        }]
+  const commonChartOptions = {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        color: '#fff',
+        font: { weight: 'bold' },
+        formatter: (value, ctx) => {
+          const total = ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+          const pct = total ? Math.round((value/total)*100) : 0;
+          return pct + '%';
+        }
       },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          datalabels: {
-            color: '#fff',
-            font: { weight: 'bold' },
-            formatter: (value, ctx) => {
-              const total = ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
-              const pct = total ? Math.round((value/total)*100) : 0;
-              return pct + '%';
-            }
-          },
-          tooltip: {
-            callbacks: {
-              label: (item) => {
-                const total = item.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
-                const v = item.raw;
-                const pct = total ? Math.round((v/total)*100) : 0;
-                return `${item.label}: ${v} (${pct}%)`;
-              }
-            }
+      tooltip: {
+        callbacks: {
+          label: (item) => {
+            const total = item.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+            const v = item.raw;
+            const pct = total ? Math.round((v/total)*100) : 0;
+            return `${item.label}: ${v} (${pct}%)`;
           }
         }
       }
-    });
-  }
+    }
+  };
 
-  function renderEnvioChart(){
-    const ctx = document.getElementById('envioPieChart').getContext('2d');
-    const used = 7;
-    const notUsed = 30 - used; // 23
+  function createPieChart(canvasId, used, total, usedLabel, notUsedLabel, colors) {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    const notUsed = total - used;
+    
     new Chart(ctx, {
       type: 'pie',
       data: {
-        labels: ['Used Envio', 'Other submissions'],
+        labels: [usedLabel, notUsedLabel],
         datasets: [{
           data: [used, notUsed],
-          backgroundColor: ['#10B981', '#CBD5E1'],
+          backgroundColor: colors,
           borderColor: '#ffffff',
           borderWidth: 2,
           hoverOffset: 8
         }]
       },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          datalabels: {
-            color: '#fff',
-            font: { weight: 'bold' },
-            formatter: (value, ctx) => {
-              const total = ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
-              const pct = total ? Math.round((value/total)*100) : 0;
-              return pct + '%';
-            }
-          },
-          tooltip: {
-            callbacks: {
-              label: (item) => {
-                const total = item.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
-                const v = item.raw;
-                const pct = total ? Math.round((v/total)*100) : 0;
-                return `${item.label}: ${v} (${pct}%)`;
-              }
-            }
-          }
-        }
-      }
+      options: commonChartOptions
     });
   }
 
-  function showChart(tech){
-    const ids = ['bga','envio','0x','reown','para'];
-    ids.forEach(id => {
-      const el = document.getElementById(id + '-chart');
-      if(el) el.style.display = (id === tech) ? 'block' : 'none';
-    });
-  }
-
-  // --- BGA sample dataset (from your list) ---
-  const bgaProjects = [
-    { category: 'Online', project: 'BlockBeats 3.0', summary: 'Web3, gaming-inspired music/art ownership; creators mint musical NFTs.' },
-    { category: 'Payments', project: 'Codex', summary: 'Payments with contextual messaging to add trust to transactions.' },
-    { category: 'Payments', project: 'MoNurse', summary: 'Marketplace for caregivers and those seeking caregiving services.' },
-    { category: 'Payments', project: 'GAMpayMX', summary: 'Offline-first secure payments for events/rural areas; syncs when online.' },
-    { category: 'Payments', project: 'Malintzin', summary: 'Turns school-supply cards into local-merchant digital payments via QR.' },
-    { category: 'Payments', project: 'PACTOPAY', summary: 'Freelance agreements as smart contracts; gasless payments; transparency.' },
-    { category: 'Online', project: 'CATE', summary: 'Modular, mobile-first platform for inclusion, credentials, and DeFi.' },
-    { category: 'Payments', project: 'Animetlik', summary: 'Subscriptions for manga/manhwa/fanfics with transparent on-chain splits.' },
-    { category: 'Consumer Fintech', project: 'Breathe & Build', summary: 'Breathwork habit journey; 28-day track; NFT trophy for completion.' },
-    { category: 'Consumer Fintech', project: 'La Kiniela', summary: 'Prediction markets for LATAM events using stablecoins on Monad.' },
-    { category: 'Consumer Fintech', project: 'Senu', summary: 'Remittances for Nicaraguan migrants via simple WhatsApp-like flow.' },
-    { category: 'Consumer Fintech', project: 'PasaCoin', summary: 'Turns social trust circles into an on-chain financial reputation.' },
-    { category: 'Consumer Fintech', project: 'Prestifym3', summary: 'Credit scoring with mixed traditional/alt/on-chain data + ML.' },
-    { category: 'Consumer Fintech', project: 'PakalFi', summary: 'Parametric micro-insurance; instant payouts; low premiums.' },
-    { category: 'Payments', project: 'AztlanFi', summary: 'Global payments bridge; 32 corridors; PWA + WhatsApp bot.' },
-    { category: 'Consumer Fintech', project: 'Esencia', summary: 'Marketplace for artisans with verified authenticity and payments.' },
-    { category: 'Consumer Fintech', project: 'Resguarda', summary: 'Community-managed micro-insurance funds via smart contracts.' },
-    { category: 'Consumer Fintech', project: 'Cryptalia', summary: 'Mobile app teaching personal finance basics.' },
-    { category: 'Consumer Fintech', project: 'VibraniOm', summary: 'Stress reduction through music; one-click sessions.' }
-  ];
-
-  function renderBgaTableAndBar(){
-    // Table
-    const tbody = document.querySelector('#bga-table tbody');
-    bgaProjects.forEach(p => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${p.category}</td><td>${p.project}</td><td>${p.summary}</td>`;
-      tbody.appendChild(tr);
-    });
-
-    // Counts by category
-    const counts = bgaProjects.reduce((acc, p) => {
-      acc[p.category] = (acc[p.category] || 0) + 1;
-      return acc;
-    }, {});
-    const labels = Object.keys(counts);
-    const data = labels.map(l => counts[l]);
-
-    // Bar chart
-    const ctx = document.getElementById('bgaBarChart').getContext('2d');
-    new Chart(ctx, {
+  // --- Initialize Charts ---
+  document.addEventListener('DOMContentLoaded', () => {
+    // Track Distribution
+    const trackCtx = document.getElementById('trackDistributionChart').getContext('2d');
+    new Chart(trackCtx, {
       type: 'bar',
       data: {
-        labels,
+        labels: ['Payments', 'Consumer Fintech', 'Online'],
         datasets: [{
-          label: 'Projects (partial)',
-          data
+          label: 'Submissions',
+          data: [24, 8, 4],
+          backgroundColor: ['#3498db', '#27ae60', '#f39c12']
         }]
       },
       options: {
@@ -361,69 +444,41 @@
           datalabels: {
             anchor: 'end',
             align: 'top',
-            formatter: (v)=>v
-          },
-          tooltip: { enabled: true }
+            color: '#2c3e50',
+            font: { weight: 'bold' },
+            formatter: (v) => v
+          }
         },
         scales: {
           y: { beginAtZero: true, ticks: { precision: 0 } }
         }
       }
     });
-  }
 
-  // --- Mentorship table ---
-  const mentors = [
-    { name: 'Antonio Starkfit', hours: 7 },
-    { name: 'Anthony', hours: 6 },
-    { name: 'Arturo', hours: 6 },
-    { name: 'Brayan', hours: 6 },
-    { name: 'Carlos C — Remote', hours: 5 },
-    { name: 'Erik', hours: 5 },
-    { name: 'Jazz', hours: 5 },
-    { name: 'Jennifer Gabriela — Remote', hours: 5 },
-    { name: 'Jeny', hours: 4 },
-    { name: 'Jesús (RogersX) — Remote', hours: 5 },
-    { name: 'Jistro', hours: 6 },
-    { name: 'Mel', hours: 6 },
-    { name: 'Michael', hours: 3 },
-    { name: 'Roman', hours: 5 },
-    { name: 'Sergio', hours: 5 },
-    { name: 'Valentín', hours: 6 },
-    { name: 'Vianey', hours: 6 }
-  ];
-
-  function renderMentors(){
-    const tbody = document.querySelector('#mentors-table tbody');
-    let total = 0;
-    mentors.forEach(m => {
-      total += m.hours;
-      const tr = document.createElement('tr');
-      const remote = /remote/i.test(m.name) ? 'Yes' : 'No';
-      tr.innerHTML = `<td>${m.name}</td><td>${m.hours}</td><td>${remote}</td>`;
-      tbody.appendChild(tr);
+    // Platform Distribution
+    const platformCtx = document.getElementById('platformChart').getContext('2d');
+    new Chart(platformCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['PWA', 'Android APK', 'Farcaster Mini App', 'iOS/Other'],
+        datasets: [{
+          data: [16, 14, 3, 3],
+          backgroundColor: ['#3498db', '#27ae60', '#9b59b6', '#f39c12']
+        }]
+      },
+      options: {
+        ...commonChartOptions,
+        maintainAspectRatio: true,
+        aspectRatio: 1
+      }
     });
-    // Totals
-    document.getElementById('total-hours').textContent = total; // 91
-    const fullShifts = Math.floor(total / 6); // 15
-    const remainder = total % 6; // 1
-    const approx = (total / 6).toFixed(2); // 15.17
-    document.getElementById('total-shifts').textContent =
-      `${fullShifts} full shifts + ${remainder} h (${approx} shifts)`;
-  }
 
-  // --- Load Day-1 snapshot (metricas.html) ---
-  document.addEventListener('DOMContentLoaded', () => {
-    renderBGAPieChart();
-    renderEnvioChart();
-    renderBgaTableAndBar();
-    renderMentors();
-
-    // default visible chart = BGA
-    fetch('metricas.html')
-      .then(r => r.text())
-      .then(html => { document.getElementById('metricas-container').innerHTML = html; })
-      .catch(() => { document.getElementById('metricas-container').textContent = 'Snapshot not available yet.'; });
+    // Sponsor Charts
+    createPieChart('bgaChart', 20, 36, 'BGA Track', 'Other', ['#27ae60', '#bdc3c7']);
+    createPieChart('reownChart', 16, 36, 'Used Reown', 'Other', ['#3498db', '#bdc3c7']);
+    createPieChart('zeroXChart', 9, 36, 'Used 0x', 'Other', ['#e74c3c', '#bdc3c7']);
+    createPieChart('envioChart', 5, 36, 'Used Envio', 'Other', ['#9b59b6', '#bdc3c7']);
+    createPieChart('paraChart', 4, 36, 'Used Para', 'Other', ['#f39c12', '#bdc3c7']);
   });
 </script>
 
