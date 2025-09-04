@@ -1,216 +1,430 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporte de Avances del Hackathon Mobil3</title>
-    
-    <link rel="stylesheet" href="./style/global.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mobil3 Hackathon x Monad · Preliminary Report</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.9.3/dist/html2pdf.bundle.min.js"></script>
+  <link rel="stylesheet" href="./style/global.css">
+  <style>
+    .card{background:#fff;padding:32px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.08);margin-bottom:32px}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .centered-text{text-align:center}
+    .muted{color:#6b7280}
+    .tag{display:inline-block;padding:4px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:600;font-size:12px}
+    .warn{background:#fff7ed;color:#9a3412}
+    .ok{background:#ecfdf5;color:#065f46}
+    .section-separator{border:0;border-top:1px solid #e5e7eb;margin:24px 0}
+    .tech-list{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    .tech-button{padding:8px 12px;border-radius:8px;border:1px solid #e5e7eb;background:#f9fafb;cursor:pointer}
+    .tech-button:focus,.tech-button:hover{outline:none;background:#f3f4f6}
+    .chart-wrapper{position:relative}
+    .chart-container{display:none;max-width:520px}
+    .placeholder{padding:20px;border:1px dashed #e5e7eb;border-radius:12px;background:#fafafa}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:left;vertical-align:top}
+    thead{background:#f3f4f6}
+    .download-button{margin:12px 0 16px;padding:10px 14px;border:0;border-radius:10px;background:#111827;color:#fff;cursor:pointer}
+    @media (max-width:768px){.container{padding:16px}.chart-container{max-width:100%}}
+  </style>
+
+  <!-- libs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.9.3/dist/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
-<div class="container">
-    <button class="download-button" onclick="downloadReport()">Descargar Reporte (PDF)</button>
-    <h1>Reporte de Avances del Hackathon Mobil3</h1>
-    <p class="date-location"><strong>Fecha y Lugar:</strong> Ciudad de México, 20 - 24 de agosto de 2025</p>
+<div id="report-container" class="container">
+  <button class="download-button" onclick="downloadReport()">Download Report (PDF)</button>
+  <h1 class="centered-text">Mobil3 Hackathon x Monad — Preliminary Field Report</h1>
+  <p class="centered-text muted">Mexico City · Aug 20–24, 2025 &nbsp;•&nbsp; Pre-event enablement: Aug 11–15, 2025</p>
 
-    <h2>Resumen General del Evento</h2>
-    <p>El Hackathon Mobil3, enfocado en el desarrollo de soluciones innovadoras en fintech y pagos sobre la blockchain de Monad, ha concluido exitosamente. Los equipos trabajaron intensamente en sus proyectos, abordando desafíos técnicos y de negocio con el apoyo de mentores. Este reporte presenta un análisis de las tendencias, logros y obstáculos observados en los tracks principales, así como los proyectos finalistas que surgieron del evento.</p>
-
-    <hr class="section-separator">
-
-    <h2>Track: Pagos</h2>
-    <h3>Perspectiva y Enfoque Estratégico</h3>
-    <p>Los equipos involucrados en el track de Pagos adoptaron un enfoque pragmático y centrado en el usuario. Su estrategia principal fue construir soluciones aprovechando tecnologías de fácil integración y alta componibilidad, como reown, 0x y Para. El objetivo común fue claro: diseñar experiencias que simplificaran el primer contacto del usuario con la red de Monad y, por extensión, con el ecosistema Web3, eliminando fricciones en el proceso de onboarding.</p>
-
-    <h3>Fortalezas y Logros Clave</h3>
+  <div class="card">
+    <span class="tag warn">Preliminary — data pending full submissions list</span>
+    <h2>Scope & Data Status</h2>
     <ul>
-        <li><strong>Implementación Ágil de Contratos Inteligentes:</strong> Mostraron gran facilidad para integrar la lógica de los smart contracts directamente en sus aplicaciones, validando sus ideas de negocio de manera rápida.</li>
-        <li><strong>Aprovechamiento del Ecosistema:</strong> Supieron capitalizar los servicios ofrecidos por los patrocinadores, utilizando herramientas que eran sencillas de comprender e implementar, lo que aceleró su ciclo de desarrollo.</li>
-        <li><strong>Prototipado Rápido y Validación Local:</strong> Lograron un funcionamiento eficiente en entornos de desarrollo locales, lo que les permitió iterar y probar funcionalidades de forma ágil antes de enfrentar entornos de prueba.</li>
+      <li>This document captures <strong>field observations</strong> and <strong>mentor interactions</strong> across tracks we followed closely (BGA, 0x, Para, reown).</li>
+      <li>Final, audited metrics (per-team tech adoption, repos, on-chain evidence) will ship after the <strong>official submissions list</strong> is available.</li>
     </ul>
+  </div>
 
-    <h3>Desafíos y Áreas de Oportunidad</h3>
+  <div class="card">
+    <h2>Executive Highlights</h2>
     <ul>
-        <li><strong>Complejidad en la Integración de Servicios:</strong> La falta de experiencia se hizo evidente al intentar conectar más de dos servicios de terceros simultáneamente, así como al pasar de un entorno local a la interacción con una red de prueba compartida.</li>
-        <li><strong>Obstáculos en el Flujo de Despliegue:</strong> Surgieron dificultades al configurar los procesos de despliegue continuo con herramientas como GitHub y Vercel, pasos cruciales para verificar el funcionamiento correcto de las aplicaciones en un entorno live.</li>
-        <li><strong>Integración con la Testnet de Monad:</strong> La conexión y migración de la lógica de negocio a la red de prueba específica de Monad representó un obstáculo técnico significativo para varios equipos.</li>
-        <li><strong>Brecha hacia la Portabilidad Móvil:</strong> Se observó una dificultad generalizada para migrar los prototipos, inicialmente concebidos como aplicaciones web, a una versión móvil funcional.</li>
+      <li><strong>Fast local prototyping.</strong> Teams advanced wallet connect, payments, and UX flows quickly in local/dev environments.</li>
+      <li><strong>User-first Payments.</strong> Clear focus on reducing first-time Web3 friction on Monad.</li>
+      <li><strong>Modular stacks.</strong> Sponsor SDKs were adopted when integration paths were straightforward.</li>
+      <li><strong>Testnet migration had mixed results.</strong> Local prototyping was fast; moving to <strong>Monad testnet</strong> created friction for some (RPC setup, environment promotion, contract migration).</li>
+      <li><strong>Recurring blockers.</strong> Deploy setup (Vercel/GitHub), testnet configuration, and mobile builds (React Native/Expo).</li>
     </ul>
+  </div>
 
-    <h3>Proyectos Finalistas Destacados ➡️</h3>
-    <div class="finalists">
-        <span class="finalist-item">ACAL-Pagos Oxxo</span>
-        <span class="finalist-item">Loanad</span>
-        <span class="finalist-item">PasaCoin</span>
-        <span class="finalist-item">Te prestamos</span>
+  <!-- Tech/Submissions pies -->
+  <div class="card">
+    <h2>Sponsor/Track Touchpoints (Submissions)</h2>
+    <p class="muted">We retain quick pies for clarity. <strong>BGA</strong> and <strong>Envio</strong> reflect current counts; others remain <em>pending verification</em>.</p>
+
+    <div class="tech-list">
+      <button class="tech-button" onclick="showChart('bga')">BGA</button>
+      <button class="tech-button" onclick="showChart('envio')">Envio</button>
+      <button class="tech-button" onclick="showChart('0x')">0x</button>
+      <button class="tech-button" onclick="showChart('reown')">reown</button>
+      <button class="tech-button" onclick="showChart('para')">Para</button>
     </div>
 
-    <hr class="section-separator">
+    <div class="chart-wrapper">
+      <!-- BGA (real: 20 of 30 overall) -->
+      <div id="bga-chart" class="chart-container" style="display:block">
+        <h3>BGA — Track Submissions</h3>
+        <canvas id="bgaPieChart"></canvas>
+        <p class="muted">20 BGA submissions out of 30 total event submissions.</p>
+      </div>
 
-    <div class="tech-section">
-        <h2>Uso de Tecnologias de patrocinadores</h2>
-        <p>A continuación, se presentan las principales tecnologías utilizadas por los equipos del Hackathon. Haz clic en cada una para ver un gráfico de su uso.</p>
-        <div class="tech-list">
-            <button class="tech-button" onclick="showChart('0x')">0x</button>
-            <button class="tech-button" onclick="showChart('reown')">reown</button>
-            <button class="tech-button" onclick="showChart('envio')">Envio</button>
-            <button class="tech-button" onclick="showChart('para')">Para</button>
-        </div>
-        
-        <div class="chart-wrapper">
-            <div id="0x-chart" class="chart-container">
-                <h3>Uso de 0x</h3>
-                <canvas id="0xPieChart"></canvas>
-            </div>
-            
-            <div id="reown-chart" class="chart-container">
-                <h3>Uso de reown</h3>
-                <canvas id="reownPieChart"></canvas>
-            </div>
-            
-            <div id="envio-chart" class="chart-container">
-                <h3>Uso de Envio</h3>
-                <canvas id="envioPieChart"></canvas>
-            </div>
+      <!-- Envio (real: 7 of 30 overall) -->
+      <div id="envio-chart" class="chart-container">
+        <h3>Envio — Used in Submissions</h3>
+        <canvas id="envioPieChart"></canvas>
+        <p class="muted">7 submissions used Envio out of 30 total.</p>
+      </div>
 
-            <div id="para-chart" class="chart-container">
-                <h3>Uso de Para</h3>
-                <canvas id="paraPieChart"></canvas>
-            </div>
+      <!-- Placeholders (pending verification) -->
+      <div id="0x-chart" class="chart-container">
+        <div class="placeholder">
+          <strong>0x — Data pending verification</strong><br/>
+          Percentages will be computed from audited repositories and official submissions.
         </div>
+      </div>
+      <div id="reown-chart" class="chart-container">
+        <div class="placeholder">
+          <strong>reown — Data pending verification</strong><br/>
+          Percentages will be computed from audited repositories and official submissions.
+        </div>
+      </div>
+      <div id="para-chart" class="chart-container">
+        <div class="placeholder">
+          <strong>Para — Data pending verification</strong><br/>
+          Percentages will be computed from audited repositories and official submissions.
+        </div>
+      </div>
     </div>
-    <hr class="section-separator">
+  </div>
 
-    <h2>Resumen de todos los equipos</h2>
-    <p>Se muestra un resumen de los equipos y el enfoque que se tuvieron a lo largo del hackathon así mismo el trank elegido durante el mismo.</p>
-  
-    <div id="metricas-container"></div>
-    
-    <hr class="section-separator">
+  <!-- BGA insights -->
+  <div class="card">
+    <h2>BGA Track — Sample Insights (Partial)</h2>
+    <p class="muted">Based on the currently available BGA submissions you shared (partial list). We summarize themes without assuming the missing entries.</p>
 
-    <h2>Conclusión General y Próximos Pasos</h2>
-    <p>Ambos tracks demostraron una gran capacidad para el prototipado rápido y un claro enfoque en la experiencia del usuario final. La tendencia principal fue el uso de un ecosistema de herramientas modulares para acelerar el desarrollo.</p>
-    <p>Los desafíos comunes en torno al despliegue (CI/CD) y la transición a entornos móviles sugieren una oportunidad clave para el futuro. Se recomienda ofrecer talleres post-hackathon enfocados en estas áreas para ayudar a los equipos a llevar sus prototipos al siguiente nivel y prepararlos para una posible incubación o lanzamiento al mercado. El Hackathon Mobil3 ha sido un éxito, validando el talento local y el potencial de la red de Monad para resolver problemas reales en Latinoamérica.</p>
+    <canvas id="bgaBarChart" style="max-width:720px"></canvas>
+
+    <h3>Projects (Partial List)</h3>
+    <table id="bga-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Project</th>
+          <th>1-line Summary</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <p class="muted">Note: This is a partial snapshot of BGA; final counts and deeper analysis will update after we receive the full submissions list.</p>
+  </div>
+
+  <!-- Mentorship -->
+  <div class="card">
+    <h2>Mentorship Workload</h2>
+    <p class="muted">Each shift equals 6 hours. Remote mentors are marked below.</p>
+
+    <table id="mentors-table">
+      <thead>
+        <tr>
+          <th>Mentor</th>
+          <th>Hours</th>
+          <th>Remote</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+      <tfoot>
+        <tr>
+          <th>Total Hours</th>
+          <th id="total-hours">—</th>
+          <th></th>
+        </tr>
+        <tr>
+          <th>Equivalent 6-hour Shifts</th>
+          <th id="total-shifts">—</th>
+          <th></th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- Teams snapshot -->
+  <div class="card">
+    <h2>Team Summary</h2>
+    <p><span class="tag warn">Initial Intake Snapshot (Day-1)</span> &nbsp;This snapshot will be superseded by the <em>Final Team Matrix</em> once the official submissions list and repositories are audited.</p>
+    <div id="metricas-container" class="muted">Loading Day-1 snapshot…</div>
+  </div>
+
+  <!-- Challenges & Recommendations (simplified language) -->
+  <div class="card">
+    <h2>Key Challenges & What We Did</h2>
+    <ul>
+      <li><strong>Deploy setup (Vercel/GitHub).</strong> We shared simple templates and an env-vars checklist so teams could push a working preview.</li>
+      <li><strong>Moving from local to Monad testnet.</strong> We provided a quick config and a verified <code>.env.example</code> to unblock RPC/chain ID issues.</li>
+      <li><strong>Contract deployment.</strong> We handed out minimal scripts and step-by-step instructions to get the first contract live.</li>
+      <li><strong>Wallet connect / signing errors.</strong> We mapped common errors to fixes using reown examples.</li>
+      <li><strong>Mobile builds.</strong> We pointed teams to React Native/Expo starters and suggested a PWA fallback when needed.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Recommendations (Next Steps)</h2>
+    <ul>
+      <li><strong>Official Starter Templates</strong> (Web & RN/Expo) with reown, a “first TX on Monad” example, and ready-to-use CI/CD.</li>
+      <li><strong>Two-week Follow-on Support</strong> (office hours) with sponsors focused on turning demos into MVPs.</li>
+      <li><strong>Optional Telemetry</strong> to measure time-to-first-transaction and SDK uptake (developer activation).</li>
+      <li><strong>Publish Final Team Matrix</strong> once we have the full submissions list (repo, demo, contract address, first tx hash).</li>
+    </ul>
+  </div>
 </div>
 
 <script>
-    Chart.register(ChartDataLabels);
-
-    const charts = {};
-    
-    // Función para crear el gráfico
-    function createChart(id, label, data, backgroundColor) {
-        const ctx = document.getElementById(id).getContext('2d');
-        if (charts[id]) {
-            charts[id].destroy();
-        }
-        charts[id] = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['Proyectos que lo usaron', 'Proyectos que no lo usaron'],
-                datasets: [{
-                    label: `Uso de ${label}`,
-                    data: data,
-                    backgroundColor: backgroundColor,
-                    borderColor: '#f4f4f4',
-                    borderWidth: 2,
-                    hoverOffset: 10,
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false,
-                    },
-                    datalabels: {
-                        color: '#fff',
-                        font: {
-                            weight: 'bold'
-                        },
-                        formatter: (value, context) => {
-                            let total = 0;
-                            context.dataset.data.forEach(data => {
-                                total += data;
-                            });
-                            const percentage = (value / total * 100).toFixed(0);
-                            return `${percentage}%`;
-                        }
-                    },
-                    tooltip: {
-                      callbacks: {
-                        label: function(tooltipItem) {
-                          const value = tooltipItem.raw;
-                          return `${tooltipItem.label}: ${value}%`;
-                        }
-                      }
-                    }
-                }
-            }
-        });
-    }
-
-    // Datos estáticos
-    const staticData = {
-        '0x': {
-            data: [45, 55],
-            colors: ['#3498db', '#bdc3c7']
-        },
-        'reown': {
-            data: [75, 25],
-            colors: ['#e67e22', '#bdc3c7']
-        },
-        'envio': {
-            data: [80, 20],
-            colors: ['#2ecc71', '#bdc3c7']
-        },
-        'para': {
-            data: [30, 70],
-            colors: ['#9b59b6', '#bdc3c7']
-        }
-    };
-
-    // Función principal para mostrar el gráfico
-    function showChart(tech) {
-        const chartContainers = document.querySelectorAll('.chart-container');
-        chartContainers.forEach(container => {
-            container.style.display = 'none';
-        });
-
-        const selectedChartContainer = document.getElementById(`${tech}-chart`);
-        selectedChartContainer.style.display = 'block';
-
-        const techData = staticData[tech];
-        createChart(`${tech}PieChart`, tech.charAt(0).toUpperCase() + tech.slice(1), techData.data, techData.colors);
-    }
-    
-    // Función para descargar el reporte como PDF
-    function downloadReport() {
-        const element = document.getElementById('report-container');
-        html2pdf(element, {
-            margin: 10,
-            filename: 'Reporte_Hackathon_Mobil3.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        });
-    }
-
-    // Script para cargar metricas.html
-    document.addEventListener('DOMContentLoaded', function() {
-        fetch('metricas.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('metricas-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error al cargar metricas.html:', error));
+  // --- PDF export ---
+  function downloadReport(){
+    const el = document.getElementById('report-container');
+    html2pdf(el, {
+      margin: 10,
+      filename: 'Mobil3xMonad_Preliminary_Report.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     });
+  }
+
+  // --- Charts ---
+  Chart.register(ChartDataLabels);
+
+  function renderBGAPieChart(){
+    const ctx = document.getElementById('bgaPieChart').getContext('2d');
+    const bga = 20;
+    const other = 30 - bga; // 10
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['BGA submissions', 'Other tracks'],
+        datasets: [{
+          data: [bga, other],
+          backgroundColor: ['#6366F1', '#CBD5E1'],
+          borderColor: '#ffffff',
+          borderWidth: 2,
+          hoverOffset: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          datalabels: {
+            color: '#fff',
+            font: { weight: 'bold' },
+            formatter: (value, ctx) => {
+              const total = ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+              const pct = total ? Math.round((value/total)*100) : 0;
+              return pct + '%';
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: (item) => {
+                const total = item.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+                const v = item.raw;
+                const pct = total ? Math.round((v/total)*100) : 0;
+                return `${item.label}: ${v} (${pct}%)`;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  function renderEnvioChart(){
+    const ctx = document.getElementById('envioPieChart').getContext('2d');
+    const used = 7;
+    const notUsed = 30 - used; // 23
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Used Envio', 'Other submissions'],
+        datasets: [{
+          data: [used, notUsed],
+          backgroundColor: ['#10B981', '#CBD5E1'],
+          borderColor: '#ffffff',
+          borderWidth: 2,
+          hoverOffset: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          datalabels: {
+            color: '#fff',
+            font: { weight: 'bold' },
+            formatter: (value, ctx) => {
+              const total = ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+              const pct = total ? Math.round((value/total)*100) : 0;
+              return pct + '%';
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: (item) => {
+                const total = item.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+                const v = item.raw;
+                const pct = total ? Math.round((v/total)*100) : 0;
+                return `${item.label}: ${v} (${pct}%)`;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  function showChart(tech){
+    const ids = ['bga','envio','0x','reown','para'];
+    ids.forEach(id => {
+      const el = document.getElementById(id + '-chart');
+      if(el) el.style.display = (id === tech) ? 'block' : 'none';
+    });
+  }
+
+  // --- BGA sample dataset (from your list) ---
+  const bgaProjects = [
+    { category: 'Online', project: 'BlockBeats 3.0', summary: 'Web3, gaming-inspired music/art ownership; creators mint musical NFTs.' },
+    { category: 'Payments', project: 'Codex', summary: 'Payments with contextual messaging to add trust to transactions.' },
+    { category: 'Payments', project: 'MoNurse', summary: 'Marketplace for caregivers and those seeking caregiving services.' },
+    { category: 'Payments', project: 'GAMpayMX', summary: 'Offline-first secure payments for events/rural areas; syncs when online.' },
+    { category: 'Payments', project: 'Malintzin', summary: 'Turns school-supply cards into local-merchant digital payments via QR.' },
+    { category: 'Payments', project: 'PACTOPAY', summary: 'Freelance agreements as smart contracts; gasless payments; transparency.' },
+    { category: 'Online', project: 'CATE', summary: 'Modular, mobile-first platform for inclusion, credentials, and DeFi.' },
+    { category: 'Payments', project: 'Animetlik', summary: 'Subscriptions for manga/manhwa/fanfics with transparent on-chain splits.' },
+    { category: 'Consumer Fintech', project: 'Breathe & Build', summary: 'Breathwork habit journey; 28-day track; NFT trophy for completion.' },
+    { category: 'Consumer Fintech', project: 'La Kiniela', summary: 'Prediction markets for LATAM events using stablecoins on Monad.' },
+    { category: 'Consumer Fintech', project: 'Senu', summary: 'Remittances for Nicaraguan migrants via simple WhatsApp-like flow.' },
+    { category: 'Consumer Fintech', project: 'PasaCoin', summary: 'Turns social trust circles into an on-chain financial reputation.' },
+    { category: 'Consumer Fintech', project: 'Prestifym3', summary: 'Credit scoring with mixed traditional/alt/on-chain data + ML.' },
+    { category: 'Consumer Fintech', project: 'PakalFi', summary: 'Parametric micro-insurance; instant payouts; low premiums.' },
+    { category: 'Payments', project: 'AztlanFi', summary: 'Global payments bridge; 32 corridors; PWA + WhatsApp bot.' },
+    { category: 'Consumer Fintech', project: 'Esencia', summary: 'Marketplace for artisans with verified authenticity and payments.' },
+    { category: 'Consumer Fintech', project: 'Resguarda', summary: 'Community-managed micro-insurance funds via smart contracts.' },
+    { category: 'Consumer Fintech', project: 'Cryptalia', summary: 'Mobile app teaching personal finance basics.' },
+    { category: 'Consumer Fintech', project: 'VibraniOm', summary: 'Stress reduction through music; one-click sessions.' }
+  ];
+
+  function renderBgaTableAndBar(){
+    // Table
+    const tbody = document.querySelector('#bga-table tbody');
+    bgaProjects.forEach(p => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${p.category}</td><td>${p.project}</td><td>${p.summary}</td>`;
+      tbody.appendChild(tr);
+    });
+
+    // Counts by category
+    const counts = bgaProjects.reduce((acc, p) => {
+      acc[p.category] = (acc[p.category] || 0) + 1;
+      return acc;
+    }, {});
+    const labels = Object.keys(counts);
+    const data = labels.map(l => counts[l]);
+
+    // Bar chart
+    const ctx = document.getElementById('bgaBarChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Projects (partial)',
+          data
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          datalabels: {
+            anchor: 'end',
+            align: 'top',
+            formatter: (v)=>v
+          },
+          tooltip: { enabled: true }
+        },
+        scales: {
+          y: { beginAtZero: true, ticks: { precision: 0 } }
+        }
+      }
+    });
+  }
+
+  // --- Mentorship table ---
+  const mentors = [
+    { name: 'Antonio Starkfit', hours: 7 },
+    { name: 'Anthony', hours: 6 },
+    { name: 'Arturo', hours: 6 },
+    { name: 'Brayan', hours: 6 },
+    { name: 'Carlos C — Remote', hours: 5 },
+    { name: 'Erik', hours: 5 },
+    { name: 'Jazz', hours: 5 },
+    { name: 'Jennifer Gabriela — Remote', hours: 5 },
+    { name: 'Jeny', hours: 4 },
+    { name: 'Jesús (RogersX) — Remote', hours: 5 },
+    { name: 'Jistro', hours: 6 },
+    { name: 'Mel', hours: 6 },
+    { name: 'Michael', hours: 3 },
+    { name: 'Roman', hours: 5 },
+    { name: 'Sergio', hours: 5 },
+    { name: 'Valentín', hours: 6 },
+    { name: 'Vianey', hours: 6 }
+  ];
+
+  function renderMentors(){
+    const tbody = document.querySelector('#mentors-table tbody');
+    let total = 0;
+    mentors.forEach(m => {
+      total += m.hours;
+      const tr = document.createElement('tr');
+      const remote = /remote/i.test(m.name) ? 'Yes' : 'No';
+      tr.innerHTML = `<td>${m.name}</td><td>${m.hours}</td><td>${remote}</td>`;
+      tbody.appendChild(tr);
+    });
+    // Totals
+    document.getElementById('total-hours').textContent = total; // 91
+    const fullShifts = Math.floor(total / 6); // 15
+    const remainder = total % 6; // 1
+    const approx = (total / 6).toFixed(2); // 15.17
+    document.getElementById('total-shifts').textContent =
+      `${fullShifts} full shifts + ${remainder} h (${approx} shifts)`;
+  }
+
+  // --- Load Day-1 snapshot (metricas.html) ---
+  document.addEventListener('DOMContentLoaded', () => {
+    renderBGAPieChart();
+    renderEnvioChart();
+    renderBgaTableAndBar();
+    renderMentors();
+
+    // default visible chart = BGA
+    fetch('metricas.html')
+      .then(r => r.text())
+      .then(html => { document.getElementById('metricas-container').innerHTML = html; })
+      .catch(() => { document.getElementById('metricas-container').textContent = 'Snapshot not available yet.'; });
+  });
 </script>
 
 </body>

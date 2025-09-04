@@ -1,129 +1,75 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Principal de Monad</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <link rel="stylesheet" href="./style/global.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Monad Main Menu</title>
 
-    <style>
-        /* Estilos específicos para el encabezado (logo) */
-        .header {
-            text-align: center;
-            padding-top: 20px;
-        }
-        .header img {
-            max-width: 150px;
-            height: auto;
-        }
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <link rel="stylesheet" href="./style/global.css"/>
 
-        /* Estilos del menú principal (los botones siempre se muestran en columna) */
-        .main-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 25px; /* Aumenta la separación entre los botones */
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #ecf0f1;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .menu-button {
-            display: block;
-            width: 100%;
-            padding: 15px 10px 10px 10px;
-            background-color: #3498db;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        .menu-button:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-        }
+  <style>
+    .header{ text-align:center; padding-top:20px; }
+    .header img{ max-width:150px; height:auto; }
 
-        /* Estilos del pie de página */
-        .footer {
-            margin-top: 60px;
-            padding: 15px;
-            border-top: 1px solid #ddd;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 15px;
-        }
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-        .footer-content img {
-            max-width: 100px;
-            height: auto;
-            margin-bottom: 5px;
-        }
-        .social-icons a {
-            color: #555;
-            margin: 0 8px;
-            font-size: 1.5em;
-            transition: color 0.3s;
-        }
-        .social-icons a:hover {
-            color: #3498db;
-        }
-        .footer p {
-            margin: 0;
-            font-size: 14px;
-            color: #777;
-        }
+    .main-menu{
+      display:flex; flex-direction:column; gap:25px;
+      margin-top:30px; padding:20px; background:#ecf0f1;
+      border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    }
+    .menu-button{
+      display:block; width:100%; padding:15px 10px 10px;
+      background:#3498db; color:#fff; text-align:center; text-decoration:none;
+      font-size:18px; font-weight:bold; border-radius:5px;
+      transition:background-color .3s ease, transform .2s ease;
+      box-shadow:0 2px 5px rgba(0,0,0,.2);
+    }
+    .menu-button:hover{ background:#2980b9; transform:translateY(-2px); }
 
-        /* Se elimina la media query para el menú para que siempre sea en columna */
-        @media (min-width: 600px) {
-            .footer {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-            .footer-content {
-                flex-direction: row;
-                gap: 20px;
-            }
-        }
-    </style>
+    .footer{
+      margin-top:60px; padding:15px; border-top:1px solid #ddd;
+      display:flex; flex-direction:column; align-items:center; text-align:center; gap:15px;
+    }
+    .footer-content{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+    .footer-content img{ max-width:100px; height:auto; margin-bottom:5px; }
+    .social-icons a{ color:#555; margin:0 8px; font-size:1.5em; transition:color .3s; }
+    .social-icons a:hover{ color:#3498db; }
+    .footer p{ margin:0; font-size:14px; color:#777; }
+
+    @media (min-width:600px){
+      .footer{ flex-direction:row; justify-content:space-between; align-items:center; }
+      .footer-content{ flex-direction:row; gap:20px; }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container header">
-        <img src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiejgeokgt62gygh3e3frfm5e6xjmjyallf4ixpvv3nchh2uu4my7u"    alt="Logo de la empresa">
-    </div>
+  <div class="container header">
+    <img src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiejgeokgt62gygh3e3frfm5e6xjmjyallf4ixpvv3nchh2uu4my7u" alt="Company logo">
+  </div>
 
-    <div class="container main-menu">
-        <a href="actividades.html" class="menu-button">Actividades / Frutero</a>
-        <a href="analisis.html" class="menu-button">Análisis del Evento</a>
-        <a href="#" class="menu-button">Investigacion Cualitativa</a>
-    </div>
+  <div class="container main-menu">
+    <!-- actividades.html -->
+    <a href="actividades.html" class="menu-button">Frutero Activity & Deliverables</a>
 
-    <div class="container footer">
-        <div class="footer-content">
-            <img src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiejgeokgt62gygh3e3frfm5e6xjmjyallf4ixpvv3nchh2uu4my7u" alt="Logo de la empresa">
-            <p>&copy; 2025</p>
-        </div>
-        <div class="social-icons">
-            <a href="#"><i class="fab fa-twitter fa-fw"></i></a>
-            <a href="#"><i class="fab fa-github fa-fw"></i></a>
-            <a href="#"><i class="fas fa-paper-plane fa-fw"></i></a>
-        </div>
+    <!-- analisis.html -->
+    <a href="analisis.html" class="menu-button">Event Field Report (Preliminary)</a>
+
+    <!-- futuro: página de análisis de proyectos -->
+    <a href="#" class="menu-button">Project Analysis (Quantitative & Qualitative)</a>
+  </div>
+
+  <div class="container footer">
+    <div class="footer-content">
+      <img src="https://red-causal-armadillo-397.mypinata.cloud/ipfs/bafkreiejgeokgt62gygh3e3frfm5e6xjmjyallf4ixpvv3nchh2uu4my7u" alt="Company logo">
+      <p>&copy; 2025</p>
     </div>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-twitter fa-fw"></i></a>
+      <a href="#"><i class="fab fa-github fa-fw"></i></a>
+      <a href="#"><i class="fas fa-paper-plane fa-fw"></i></a>
+    </div>
+  </div>
 
 </body>
 </html>

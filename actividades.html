@@ -1,255 +1,357 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actividades Hackathon x Monad</title>
-    <link rel="stylesheet" href="./style/global.css">
-    <style>
-        /* Estilos adicionales basados en la paleta de global.css */
-        .card {
-            background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
-        }
-
-        .table-container {
-            overflow-x: auto;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            margin-top: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            min-width: 600px;
-        }
-
-        thead {
-            background-color: #3498db;
-            color: white;
-        }
-        
-        th, td {
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        tbody tr:hover {
-            background-color: #ecf0f1;
-        }
-        
-        .total-row {
-            font-weight: bold;
-            background-color: #d35400;
-            color: white;
-        }
-
-        .total-row td {
-            border-top: 2px solid #34495e;
-        }
-        
-        a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-        
-        .list-with-links li {
-            background: #ecf0f1;
-            margin-bottom: 12px;
-            padding: 15px;
-            border-left: 5px solid #3498db;
-            border-radius: 8px;
-        }
-        
-        .list-with-links li strong {
-            display: block;
-        }
-
-        .centered-text {
-            text-align: center;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                margin: 20px;
-            }
-            .container {
-                padding: 20px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Frutero Activity · Mobil3 Hackathon x Monad</title>
+  <link rel="stylesheet" href="./style/global.css">
+  <style>
+    /* Extra styles on top of your global.css palette */
+    .card {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .centered-text { text-align: center; }
+    .muted { color: #6b7280; }
+    .table-container {
+      overflow-x: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-top: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      min-width: 760px;
+    }
+    thead {
+      background-color: #3498db;
+      color: #fff;
+    }
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+    }
+    tbody tr:hover { background-color: #ecf0f1; }
+    .total-row {
+      font-weight: 700;
+      background-color: #d35400;
+      color: #fff;
+    }
+    .total-row td { border-top: 2px solid #34495e; }
+    a { color: #3498db; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .list-with-links { list-style: none; padding-left: 0; }
+    .list-with-links li {
+      background: #ecf0f1;
+      margin-bottom: 12px;
+      padding: 15px;
+      border-left: 5px solid #3498db;
+      border-radius: 8px;
+    }
+    .list-with-links li strong { display: block; }
+    @media (max-width: 768px) {
+      body { margin: 20px; }
+      .container { padding: 20px; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="centered-text">Actividad de Frutero en el Mobil3 Hackathon x Monad</h1>
+  <div class="container">
+    <h1 class="centered-text">Frutero Activity at the Mobil3 Hackathon x Monad</h1>
 
-        <!-- Introducción del reporte -->
-        <div class="card">
-            <h2>Reporte del Hackathon Mobil3</h2>
-            <p>Este documento presenta un reporte detallado de las actividades realizadas por el equipo de Frutero en el marco del <strong>Hackathon Mobil3 x Monad</strong>. El objetivo es ofrecer a Monad una visión completa de la organización, alcance y métricas clave de los talleres, guías, mentorías y otras actividades que contribuyeron al éxito del evento.</p>
-        </div>
-
-        <!-- Talleres -->
-        <div class="card">
-            <h2>Talleres</h2>
-            <p><strong>5</strong> talleres de preparación online</p>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Sesión</th>
-                            <th>Título</th>
-                            <th>Fecha</th>
-                            <th>Twitter Views</th>
-                            <th>YouTube Views</th>
-                            <th>Total Views</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Monad 101: 1</td>
-                            <td>Empieza Aquí</td>
-                            <td>ago 11</td>
-                            <td>424</td>
-                            <td>71</td>
-                            <td>495</td>
-                        </tr>
-                        <tr>
-                            <td>Monad 101: 2</td>
-                            <td>Blockchain para no - técnicos</td>
-                            <td>ago 12</td>
-                            <td>300</td>
-                            <td>45</td>
-                            <td>345</td>
-                        </tr>
-                        <tr>
-                            <td>Monad 101: 3</td>
-                            <td>Casos de uso</td>
-                            <td>ago 13</td>
-                            <td>170</td>
-                            <td>40</td>
-                            <td>210</td>
-                        </tr>
-                        <tr>
-                            <td>Monad 101: 4</td>
-                            <td>Frameworks para ideación de ideas</td>
-                            <td>ago 14</td>
-                            <td>206</td>
-                            <td>49</td>
-                            <td>255</td>
-                        </tr>
-                        <tr>
-                            <td>Monad 101: 5</td>
-                            <td>Validación y pitch preparation</td>
-                            <td>ago 15</td>
-                            <td>370</td>
-                            <td>32</td>
-                            <td>402</td>
-                        </tr>
-                        <tr class="total-row">
-                            <td>TOTAL Métricas Taller</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>1470</td>
-                            <td>237</td>
-                            <td>1707</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <p><strong>4</strong> talleres en el venue (IRL)</p>
-            <p><strong>2</strong> actividades de formación de equipos (IRL)</p>
-        </div>
-
-        <!-- Guías -->
-        <div class="card">
-            <h2>Guías</h2>
-            <p><strong>5</strong> guías en español</p>
-            <ul class="list-with-links">
-                <li>
-                    <strong>Hub para Hackers:</strong>
-                    <br><a href="https://www.notion.so/fruteroclub/Hub-para-Hackers-254511282c03808a9100c426f7bb2f4f" target="_blank">https://www.notion.so/fruteroclub/Hub-para-Hackers-254511282c03808a9100c426f7bb2f4f</a>
-                </li>
-                <li>
-                    <strong>Monad Mentorships – Hub para Mentores:</strong>
-                    <br><a href="https://fruteroclub.notion.site/Monad-Mentorships-Hub-para-Mentores-24c511282c0380208e20fc9c2eb201c0" target="_blank">https://fruteroclub.notion.site/Monad-Mentorships-Hub-para-Mentores-24c511282c0380208e20fc9c2eb201c0</a>
-                </li>
-            </ul>
-        </div>
-        
-        <!-- Mentores Mobil3 Hackathon -->
-        <div class="card">
-            <h2>Mentores Mobil3 Hackathon</h2>
-            <p>Total de mentores: <strong>17</strong></p>
-            <ul class="list-with-links">
-                <li>
-                    <strong>Lista de mentores:</strong>
-                    <br><a href="https://fruteroclub.notion.site/238511282c038095ad49d7910bead9d7?v=238511282c0381dcbf3a000c638e4f8a" target="_blank">https://fruteroclub.notion.site/238511282c038095ad49d7910bead9d7?v=238511282c0381dcbf3a000c638e4f8a</a>
-                </li>
-                <li>
-                    <strong>Turnos de mentoría:</strong>
-                    <br><a href="https://docs.google.com/spreadsheets/d/1aemrR5cpn5DzNbBahAkInARqVxeOKdLpdzk7s_fQ3oA/edit?usp=sharing" target="_blank">Hoja de cálculo de Google</a>
-                </li>
-            </ul>
-            <p>Reporte de mentores: <em>(No se proporcionó información)</em></p>
-        </div>
-        
-        <!-- Entrevistas -->
-        <div class="card">
-            <h2>Entrevistas</h2>
-            <ul class="list-with-links">
-                <li>
-                    <strong>1 entrevista a Harpal:</strong>
-                    <br><a href="https://www.youtube.com/live/kls84C-Epnw?si=EPmeURGQ6jFGcF_Y" target="_blank">https://www.youtube.com/live/kls84C-Epnw?si=EPmeURGQ6jFGcF_Y</a>
-                </li>
-                <li>
-                    <strong>X entrevistas a los equipos:</strong>
-                    <br><a href="https://photos.app.goo.gl/9QrKkkWAaTtLTo949" target="_blank">Fotos de Google</a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Livestream -->
-        <div class="card">
-            <h2>Livestream</h2>
-            <p><strong>1</strong> Sesión de resolución de dudas antes del submission</p>
-        </div>
-
-        <!-- Equipos -->
-        <div class="card">
-            <h2>Equipos</h2>
-            <ul>
-                <li>Levantamiento de información por equipo</li>
-                <li>Reporte de proyectos</li>
-            </ul>
-        </div>
-        
-        <!-- Twitter -->
-        <div class="card">
-            <h2>Twitter</h2>
-            <ul>
-                <li>X tweets mencionando a Monad y/o Mobil3</li>
-                <li>Impresiones KPI’s</li>
-            </ul>
-        </div>
-        
-        <!-- Actividades Extra -->
-        <div class="card">
-            <h2>Actividades extra</h2>
-            <ul>
-                <li>Maestro de ceremonias</li>
-                <li>Juez</li>
-            </ul>
-        </div>
+    <!-- Report intro -->
+    <div class="card">
+      <h2>Mobil3 Hackathon Report</h2>
+      <p>
+        This document summarizes the activities conducted by the Frutero team for the
+        <strong>Mobil3 Hackathon x Monad</strong>. It provides Monad with a complete view of
+        organization, reach, and key metrics across workshops, guides, mentorship, and
+        other contributions that supported the event’s success.
+      </p>
     </div>
+
+    <!-- Online workshops -->
+    <div class="card">
+      <h2>Workshops</h2>
+      <p><strong>5</strong> online preparation workshops</p>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Session</th>
+              <th>Title</th>
+              <th>Date</th>
+              <th>Twitter Views</th>
+              <th>YouTube Views</th>
+              <th>Total Views</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Monad 101: 1</td>
+              <td>Start Here</td>
+              <td>Aug 11</td>
+              <td>424</td>
+              <td>71</td>
+              <td>495</td>
+              <td><a href="https://www.youtube.com/live/qtEJeNUTCUw?si=l0HD_PNix7RIR3Qx" target="_blank" rel="noopener">YouTube</a></td>
+            </tr>
+            <tr>
+              <td>Monad 101: 2</td>
+              <td>Blockchain for Non-Technical People</td>
+              <td>Aug 12</td>
+              <td>300</td>
+              <td>45</td>
+              <td>345</td>
+              <td><a href="https://www.youtube.com/live/maiVmP8jh_8?si=07gmsaI4aGAHSTzL" target="_blank" rel="noopener">YouTube</a></td>
+            </tr>
+            <tr>
+              <td>Monad 101: 3</td>
+              <td>Use Cases</td>
+              <td>Aug 13</td>
+              <td>170</td>
+              <td>40</td>
+              <td>210</td>
+              <td><a href="https://www.youtube.com/live/hfATIqq6iyg?si=YIEHsa6B2aYmFO7k" target="_blank" rel="noopener">YouTube</a></td>
+            </tr>
+            <tr>
+              <td>Monad 101: 4</td>
+              <td>Idea Frameworks</td>
+              <td>Aug 14</td>
+              <td>206</td>
+              <td>49</td>
+              <td>255</td>
+              <td><a href="https://www.youtube.com/live/DalYCOn4Q4A?si=FBLU4VAUwJPiMxU_" target="_blank" rel="noopener">YouTube</a></td>
+            </tr>
+            <tr>
+              <td>Monad 101: 5</td>
+              <td>Validation & Pitch Preparation</td>
+              <td>Aug 15</td>
+              <td>370</td>
+              <td>32</td>
+              <td>402</td>
+              <td><a href="https://www.youtube.com/live/QJWxIFeMBXk?si=_VHUT3VS-DbsZZXK" target="_blank" rel="noopener">YouTube</a></td>
+            </tr>
+            <tr class="total-row">
+              <td>Total Workshop Metrics</td>
+              <td>–</td>
+              <td>–</td>
+              <td>1,470</td>
+              <td>237</td>
+              <td>1,707</td>
+              <td>–</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>2</strong> online mentor workshops</p>
+      <ul class="list-with-links">
+        <li>
+          <strong>Mentor Workshop #1</strong><br>
+          <a href="https://www.youtube.com/live/kRAhIvfmsFc?si=qQsR0xPs4k45sAdN" target="_blank" rel="noopener">
+            https://www.youtube.com/live/kRAhIvfmsFc?si=qQsR0xPs4k45sAdN
+          </a>
+        </li>
+        <li>
+          <strong>Mentor Workshop #2</strong><br>
+          <a href="https://www.youtube.com/live/fk-XrodVOOw?si=ytFO-npraVb2T5Ze" target="_blank" rel="noopener">
+            https://www.youtube.com/live/fk-XrodVOOw?si=ytFO-npraVb2T5Ze
+          </a>
+        </li>
+      </ul>
+
+      <p><strong>4</strong> on-site workshops (IRL)</p>
+      <ul class="list-with-links">
+        <li>
+          <strong>Frutero Club (IRL)</strong><br>
+          <a href="https://www.youtube.com/live/tkex_uqrdBs?si=ghlb_mkn6D78RgH4" target="_blank" rel="noopener">
+            https://www.youtube.com/live/tkex_uqrdBs?si=ghlb_mkn6D78RgH4
+          </a>
+        </li>
+        <li>
+          <strong>From Zero to Project (IRL)</strong><br>
+          <a href="https://www.youtube.com/live/3ES64A5oQLg?si=9fSq5yfS3ENDNZc4" target="_blank" rel="noopener">
+            https://www.youtube.com/live/3ES64A5oQLg?si=9fSq5yfS3ENDNZc4
+          </a>
+        </li>
+        <li>
+          <strong>Blockchain for Impact (IRL)</strong><br>
+          <a href="https://www.youtube.com/live/rQgh7loVySY?si=cvJFxRkR2HmOLhj8" target="_blank" rel="noopener">
+            https://www.youtube.com/live/rQgh7loVySY?si=cvJFxRkR2HmOLhj8
+          </a>
+        </li>
+        <li>
+          <strong>Monad + React Native (IRL)</strong><br>
+          <a href="https://www.youtube.com/live/lIuOgTBts5s?si=W0Jsu63kNpXu2Rst" target="_blank" rel="noopener">
+            https://www.youtube.com/live/lIuOgTBts5s?si=W0Jsu63kNpXu2Rst
+          </a>
+        </li>
+      </ul>
+
+      <p><strong>2</strong> on-site team formation activities (IRL)</p>
+    </div>
+
+    <!-- Guides & Hubs -->
+<div class="card">
+    <h2>Guides & Hubs</h2>
+    <p>
+      <strong>5</strong> technical guides (created/translated into Spanish) <em>plus</em>
+      <strong>3</strong> Notion hubs that centralize all event information, technical guides,
+      Monad & sponsor documentation, recommendations, and communication channels.
+    </p>
+  
+    <ul class="list-with-links">
+      <li>
+        <strong>Hackers Hub</strong><br>
+        <a
+          href="https://www.notion.so/fruteroclub/Hub-para-Hackers-254511282c03808a9100c426f7bb2f4f"
+          target="_blank" rel="noopener"
+        >
+          https://www.notion.so/fruteroclub/Hub-para-Hackers-254511282c03808a9100c426f7bb2f4f
+        </a>
+      </li>
+      <li>
+        <strong>Mentors Hub</strong><br>
+        <a
+          href="https://fruteroclub.notion.site/Monad-Mentorships-Hub-para-Mentores-24c511282c0380208e20fc9c2eb201c0"
+          target="_blank" rel="noopener"
+        >
+          https://fruteroclub.notion.site/Monad-Mentorships-Hub-para-Mentores-24c511282c0380208e20fc9c2eb201c0
+        </a>
+      </li>
+      <li>
+        <strong>Event Landing with schedule - Wifi - sitemap - resources for hackers - communication channels - </strong><br>
+        <a
+          href="https://fruteroclub.notion.site/Gmonad-256511282c038004bdd1ebcba4374f05?pvs=74"
+          target="_blank" rel="noopener"
+        >
+          https://fruteroclub.notion.site/Gmonad-256511282c038004bdd1ebcba4374f05?pvs=74
+        </a>
+      </li>
+      <li>
+        <strong>Discord (24/7 virtual mentorship during hackathon)</strong><br>
+        <a
+          href="https://discord.gg/B9qganDq"
+          target="_blank" rel="noopener"
+        >
+          https://discord.gg/B9qganDq
+        </a>
+      </li>
+    </ul>
+  
+    <p class="muted">
+      Note: The 5 technical guides are separate deliverables; the hubs above compile all
+      resources (guides, official docs, recommendations) and link out to communication channels.
+    </p>
+  </div>
+
+    <!-- Mentors -->
+    <div class="card">
+      <h2>Mobil3 Hackathon Mentors</h2>
+      <p>Total mentors: <strong>17</strong></p>
+      <ul class="list-with-links">
+        <li>
+          <strong>Mentor List</strong><br>
+          <a href="https://fruteroclub.notion.site/238511282c038095ad49d7910bead9d7?v=238511282c0381dcbf3a000c638e4f8a"
+             target="_blank" rel="noopener">
+            https://fruteroclub.notion.site/238511282c038095ad49d7910bead9d7?v=238511282c0381dcbf3a000c638e4f8a
+          </a>
+        </li>
+        <li>
+          <strong>Mentoring Shifts</strong><br>
+          <a href="https://docs.google.com/spreadsheets/d/1aemrR5cpn5DzNbBahAkInARqVxeOKdLpdzk7s_fQ3oA/edit?usp=sharing"
+             target="_blank" rel="noopener">
+            Google Sheet
+          </a>
+        </li>
+        <li>
+          <strong>Mentor Report</strong><br>
+          <a href="https://docs.google.com/spreadsheets/d/1lzuAOqxMGEJjlMmWkYeIjHk4MXCknhfEu1O8zp76v3Y/edit?gid=0#gid=0"
+             target="_blank" rel="noopener">
+            Google Sheet
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Interviews -->
+    <div class="card">
+      <h2>Interviews</h2>
+      <ul class="list-with-links">
+        <li>
+          <strong>Interview with Harpal</strong><br>
+          <a href="https://www.youtube.com/live/kls84C-Epnw?si=EPmeURGQ6jFGcF_Y" target="_blank" rel="noopener">
+            https://www.youtube.com/live/kls84C-Epnw?si=EPmeURGQ6jFGcF_Y
+          </a>
+        </li>
+        <li>
+          <strong>On-site Team Interviews (photos)</strong><br>
+          <a href="https://photos.app.goo.gl/9QrKkkWAaTtLTo949" target="_blank" rel="noopener">
+            https://photos.app.goo.gl/9QrKkkWAaTtLTo949
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Livestream -->
+    <div class="card">
+      <h2>Livestream</h2>
+      <p>
+        <strong>1</strong> Q&A session before submissions.<br>
+        Watch: <a href="https://www.youtube.com/live/HJfHJe6vAns?si=bJUGlzOcJflJ2KrF" target="_blank" rel="noopener">
+          https://www.youtube.com/live/HJfHJe6vAns?si=bJUGlzOcJflJ2KrF
+        </a>
+      </p>
+    </div>
+
+    <!-- Teams -->
+    <div class="card">
+      <h2>Teams</h2>
+      <ul class="list-with-links">
+        <li>
+          <strong>Team-by-Team Progress Tracking</strong><br>
+          <a href="https://fruteroclub.notion.site/Avance-Monad-257511282c0380d0bb63d70155dae3e8?pvs=74"
+             target="_blank" rel="noopener">
+            https://fruteroclub.notion.site/Avance-Monad-257511282c0380d0bb63d70155dae3e8?pvs=74
+          </a>
+        </li>
+        <li><strong>Project Reports</strong> <span class="muted">(internal)</span></li>
+      </ul>
+    </div>
+
+    <!-- Twitter -->
+    <div class="card">
+      <h2>Twitter</h2>
+      <ul>
+        <li><strong>19</strong> tweets mentioning Monad and/or Mobil3</li>
+        <li><strong>Impressions KPI:</strong> 12,490</li>
+      </ul>
+      <p class="muted">
+        Note: Count includes only posts explicitly tagging <code>@Mobil3_xyz</code> or <code>@Monad</code>.
+        Additional posts were published without these tags.
+      </p>
+    </div>
+
+    <!-- Extra activities -->
+    <div class="card">
+      <h2>Extra Activities</h2>
+      <ul>
+        <li>Support for Master of Ceremonies (MC)</li>
+      </ul>
+    </div>
+  </div>
 </body>
 </html>
